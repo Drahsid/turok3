@@ -1,0 +1,39 @@
+name: Turok 3
+sha1: a2e0a28dc0d3a48c7c02cb9e4c4b38fe04b2d436
+options:
+  basename: turok3
+  target_path: baserom.z64
+  base_path: .
+  compiler: GCC
+  find_file_boundaries: True
+  platform: n64
+  generated_c_preamble: "#include \"include_asm.h\""
+segments:
+  - name: header
+    type: header
+    start: 0x0
+  - name: boot
+    type: bin
+    start: 0x40
+  - name: main
+    type: code
+    start: 0x1000
+    vram: 0x80000400
+    subsegments:
+      - [0x1000, hasm, ../src/asm/SNMAIN]
+  - name: code
+    type: code
+    start: 0x1100
+    vram: 0x00200500 # should be 0x00200000, but is off by 0x500? (0x400 + the 0x100 from snmain?)
+    subsegments:
+      - [0x1100, asm]
+      - [0xB5E0, c, main]
+      - [0xB860, bin] # more code
+  - type: bin
+    start: 0x101000
+  - name: static
+    type: bin
+    start: 0xDD5934
+    subsegments:
+    - [0xDD5934, bin, cartdata]
+  - [0x2000000]

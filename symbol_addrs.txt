@@ -1,6 +1,7 @@
 boot_main = 0x80000400; // type:func
 STVM_MapTLB = 0x80000488; // type:func
 main = 0x0020AA50; // type:func
+__main = 0x0020AC00 // type:func
 memset = 0x0021E500; // type:func
 strcmp = 0x00252E18; // type:func
 strcpy = 0x00252E98; // type:func

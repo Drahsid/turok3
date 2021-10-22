@@ -6,7 +6,7 @@ INCLUDE_ASM(s32, "main", func_20AA08);
 
 INCLUDE_ASM(s32, "main", main);
 
-void func_20AC00(void) {
+void __main(void) {
 }
 
 INCLUDE_ASM(s32, "main", func_20AC08);

@@ -6,13 +6,12 @@
 undefined_funcs_auto.txt
 undefined_syms_auto.txt
 
-asm/
+./asm/
 assets/
 build/
 expected/
 nonmatchings/
 __pycache__/
-expected/
 
 .vscode
 

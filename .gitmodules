@@ -10,3 +10,6 @@
 [submodule "tools/asm-differ"]
 	path = tools/asm-differ
 	url = https://github.com/simonlindholm/asm-differ.git
+[submodule "libreultra"]
+	path = libreultra
+	url = https://github.com/n64decomp/libreultra.git

@@ -1,7 +1,7 @@
 BASENAME  = turok3
 
 BUILD_DIR = build
-ASM_DIRS  = asm src/asm
+ASM_DIRS  = asm src/asm asm/data
 BIN_DIRS  = assets
 SRC_DIR   = src
 SRC_DIRS  = $(SRC_DIR)
@@ -40,8 +40,8 @@ GREP := grep -rl
 GLOBAL_ASM_C_FILES := $(shell $(GREP) GLOBAL_ASM $(SRC_DIR) </dev/null 2>/dev/null)
 GLOBAL_ASM_O_FILES := $(foreach file,$(GLOBAL_ASM_C_FILES),$(BUILD_DIR)/$(file).o)
 
-DFLAGS := -D_LANGUAGE_C -D_FINALROM -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 -Dmips -D__GNUC__=2
-CFLAGS := -G 0 -mips3 $(OPT_FLAGS) $(INCLUDE_CFLAGS) -fno-common -B tools/mips-gcc/
+DFLAGS := -D_LANGUAGE_C -D_FINALROM -DF3DEX_GBI_2 -D__GNUC__=2
+CFLAGS := -G 0 -mips2 -mcpu=r4300 -mgp32 -mfp32 $(OPT_FLAGS) $(DFLAGS) $(INCLUDE_CFLAGS) -fno-common -B tools/mips-gcc/
 CPPFLAGS := -P -undef -Wall -lang-c $(DFLAGS) $(INCLUDE_CFLAGS) -nostdinc
 LDFLAGS := -T $(LD_SCRIPT) -Map $(TARGET).map -T undefined_syms_auto.txt -T undefined_funcs_auto.txt -T undefined_funcs.txt -T undefined_syms.txt --no-check-sections
 
@@ -91,7 +91,7 @@ $(TARGET).elf: $(O_FILES)
 	@$(LD) $(LDFLAGS) -o $@
 
 $(BUILD_DIR)/%.i: %.c
-	$(CPP) -MMD -MP -MT $@ -MF $@.d $(INCLUDE_CFLAGS) -o $@ $<
+	$(CPP) -MMD -MP -MT $@ -MF $@.d $(CPPFLAGS) $(INCLUDE_CFLAGS) -o $@ $<
 
 $(BUILD_DIR)/%.c.o: $(BUILD_DIR)/%.i
 	$(CC) -c $(CFLAGS) -o $@ $<

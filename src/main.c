@@ -4,26 +4,25 @@
 #include "common.h"
 #include "tengine.h"
 
-// return nullptr producing daddu, need to get a more precise version of gcc
-#ifdef NON_MATCHING
-/*uint32_t func_20A9E0(int32_t arg0) {
+/*#ifdef BAD_CODEGEN
+uint32_t func_20A9E0(int32_t arg0) {
     if (arg0 == 0) {
         return (uint32_t)NULLPTR;
     }
     else {
         return (uint32_t)&D_800F20CC[arg0];
     }
-}*/
-#else
+}
+#else*/
 INCLUDE_ASM(s32, "main", func_20A9E0);
-#endif
+//#endif
 
 INCLUDE_ASM(s32, "main", func_20AA08);
 
 // bzero coming from somewhere (aparently not the bss clearing part); probably will be resolved with a more precise version of gcc
 // vaddrs of data/rodata might be borked
-#ifdef NON_MATCHING
-/*uint32_t gFirstBoot;
+/*#ifdef NON_MATCHING
+uint32_t gFirstBoot;
 char gBootSignature[16] = "BootNotDone";
 
 int32_t main(void) {
@@ -77,10 +76,10 @@ int32_t main(void) {
     boot();
 
     return 0;
-}*/
-#else
+}
+#else*/
 INCLUDE_ASM(s32, "main", main);
-#endif
+//#endif
 
 void __main(void) {
 }

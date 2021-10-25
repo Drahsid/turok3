@@ -29,20 +29,20 @@ void boot(void) {
     CEngineApp__Boot(GetApp());
 }
 
-//#ifdef NON_MATCHING
-// matching besides daddu
-/*void CEngineApp__Boot(CEngineApp* thisx) {
+// Codegen is different, but this matches
+/*#ifdef BAD_CODEGEN
+void CEngineApp__Boot(CEngineApp* thisx) {
     memset(gThreadStackIdle, THREAD_IDLE, STACKSIZE_IDLE);
     osCreateThread(&gThreadIdle, THREAD_IDLE, idle, 0, gThreadStackIdle + STACKSIZE_IDLE, gThreadPriorityIdleInit);
     osStartThread(&gThreadIdle);
-}*/
-//#else
+}
+#else*/
 INCLUDE_ASM(s32, "tengine", CEngineApp__Boot);
 //#endif
 
-//#ifdef NON_MATCHING
-// matching besides daddu
-/*void CEngineApp__Idle(CEngineApp* thisx, void* arg) {
+// Codegen is different, but this matches
+/*#ifdef BAD_CODEGEN
+void CEngineApp__Idle(CEngineApp* thisx, void* arg) {
     memset(gThreadStackMain, THREAD_MAIN, STACKSIZE_MAIN);
 
     osCreateThread(&gThreadMain, THREAD_MAIN, mainproc, arg, gThreadStackMain + STACKSIZE_MAIN, gThreadPriorityMain);
@@ -51,8 +51,8 @@ INCLUDE_ASM(s32, "tengine", CEngineApp__Boot);
     osSetThreadPri(NULL, gThreadPriorityIdle);
 
     while (1) {}
-}*/
-//#else
+}
+#else*/
 INCLUDE_ASM(s32, "tengine", CEngineApp__Idle);
 //#endif
 
@@ -68,14 +68,9 @@ INCLUDE_ASM(s32, "tengine", func_285E50);
 
 INCLUDE_ASM(s32, "tengine", func_285EFC);
 
-//#ifdef NON_MATCHING
-// matching besides daddu
-/*void idle(void* arg) {
+void idle(void* arg) {
     CEngineApp__Idle(GetApp(), arg);
-}*/
-//#else
-INCLUDE_ASM(s32, "tengine", idle);
-//#endif
+}
 
 void mainproc(void* arg) {
     uint32_t fpstat;

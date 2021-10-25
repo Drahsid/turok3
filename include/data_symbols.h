@@ -11,6 +11,7 @@ extern char gEngineTimestamp[256];
 extern char gEngineTimestampFormat[];
 extern char gEngineTimestampDate[];
 extern char gEngineTimestampTime[];
+extern uint32_t D_8011D7E0;
 
 #endif
 

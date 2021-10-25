@@ -29,7 +29,7 @@ N64CRC = tools/n64crc
 
 OBJCOPYFLAGS = -O binary
 
-CC := $(TOOLS_DIR)/mips-gcc/gcc
+CC := $(TOOLS_DIR)/mips-gcc/cc1
 
 OPT_FLAGS := -O2
 INCLUDE_CFLAGS := -I. -Iinclude -Ilibreultra/include/2.0I
@@ -41,7 +41,7 @@ GLOBAL_ASM_C_FILES := $(shell $(GREP) GLOBAL_ASM $(SRC_DIR) </dev/null 2>/dev/nu
 GLOBAL_ASM_O_FILES := $(foreach file,$(GLOBAL_ASM_C_FILES),$(BUILD_DIR)/$(file).o)
 
 DFLAGS := -D_LANGUAGE_C -D_FINALROM -DF3DEX_GBI_2 -D__GNUC__=2
-CFLAGS := -G 0 -mips2 -mcpu=r4300 -mgp32 -mfp32 $(OPT_FLAGS) $(DFLAGS) $(INCLUDE_CFLAGS) -fno-common -B tools/mips-gcc/
+CFLAGS := -G 0 -mips3 -mgp32 -mfp32 $(OPT_FLAGS) -fno-common -fforce-addr
 CPPFLAGS := -P -undef -Wall -lang-c $(DFLAGS) $(INCLUDE_CFLAGS) -nostdinc
 LDFLAGS := -T $(LD_SCRIPT) -Map $(TARGET).map -T undefined_syms_auto.txt -T undefined_funcs_auto.txt -T undefined_funcs.txt -T undefined_syms.txt --no-check-sections
 
@@ -93,8 +93,11 @@ $(TARGET).elf: $(O_FILES)
 $(BUILD_DIR)/%.i: %.c
 	$(CPP) -MMD -MP -MT $@ -MF $@.d $(CPPFLAGS) $(INCLUDE_CFLAGS) -o $@ $<
 
-$(BUILD_DIR)/%.c.o: $(BUILD_DIR)/%.i
-	$(CC) -c $(CFLAGS) -o $@ $<
+$(BUILD_DIR)/%.c.s: $(BUILD_DIR)/%.i
+	$(CC) $(CFLAGS) -o $@ $<
+
+$(BUILD_DIR)/%.c.o: $(BUILD_DIR)/%.c.s
+	$(AS) $(ASFLAGS) -o $@ $<
 
 $(BUILD_DIR)/%.s.o: %.s
 	$(AS) $(ASFLAGS) -o $@ $<

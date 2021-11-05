@@ -33,6 +33,8 @@ extern void func_285FC4(CEngineApp* thisx, int32_t);
 extern void func_286058(CEngineApp* thisx, int32_t);
 extern void func_41FBF8(void);
 extern uint32_t func_287068(uint32_t);
+extern void VM_Initialize(char*, char*);
+extern void CCache__Construct(OSId threadId);
 
 #endif
 

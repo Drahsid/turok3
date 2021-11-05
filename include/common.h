@@ -1,8 +1,13 @@
 #ifndef COMMON_H
 #define COMMON_H
 
+#include "include_asm.h"
 #include "inttypes.h"
-#include "PR/os.h"
+#include "common_structs.h"
+#include "unknown_structs.h"
+#include "function_symbols.h"
+#include "data_symbols.h"
+#include <ultra64.h>
 
 //  threads
 

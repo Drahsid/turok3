@@ -1,10 +1,6 @@
-#include "include_asm.h"
-#include "data_symbols.h"
-#include "function_symbols.h"
 #include "common.h"
 #include "tengine.h"
 
-/*#ifdef BAD_CODEGEN
 uint32_t func_20A9E0(int32_t arg0) {
     if (arg0 == 0) {
         return (uint32_t)NULLPTR;
@@ -13,16 +9,13 @@ uint32_t func_20A9E0(int32_t arg0) {
         return (uint32_t)&D_800F20CC[arg0];
     }
 }
-#else*/
-INCLUDE_ASM(s32, "main", func_20A9E0);
-//#endif
 
 INCLUDE_ASM(s32, "main", func_20AA08);
 
-// bzero coming from somewhere (aparently not the bss clearing part); probably will be resolved with a more precise version of gcc
-// vaddrs of data/rodata might be borked
-/*#ifdef NON_MATCHING
-uint32_t gFirstBoot;
+// loading of "systembootdone" string, (particularly bzero in place of the memset for setting the null character... but why JAL for one byte?)
+// additionally, missing behavior in bss clearing function
+//#ifdef NON_MATCHING
+/*uint32_t gFirstBoot;
 char gBootSignature[16] = "BootNotDone";
 
 int32_t main(void) {
@@ -35,7 +28,6 @@ int32_t main(void) {
         gFirstBoot = 1;
         strcpy(signature, gBootSignature);
     }
-
 
     // Reset code and data if not the first boot (ie - crash recovery)
     if (!gFirstBoot) {
@@ -76,8 +68,8 @@ int32_t main(void) {
     boot();
 
     return 0;
-}
-#else*/
+}*/
+//#else
 INCLUDE_ASM(s32, "main", main);
 //#endif
 

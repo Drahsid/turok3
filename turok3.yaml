@@ -270,11 +270,15 @@ segments:
       - [0xF1900, bin]
       - [0xF2D80, rodata, main]
       - [0x100A00, data, main]
-  - type: bin
-    start: 0x101000
+      - [0x101000, bin]
   - name: static
-    type: bin
+    type: code
     start: 0xDD5934
     subsegments:
-    - [0xDD5934, bin, cartdata]
+      - [0xDD5934, bin, cartdata]
+  - name: trailer
+    type: bin
+    start: 0x1FDB1DC
+    subsegments:
+      - [0x1FDB1DC, bin] # 0xFF to the end
   - [0x2000000]

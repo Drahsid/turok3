@@ -1,17 +1,129 @@
-#include "include_asm.h"
-#include "function_symbols.h"
-#include "data_symbols.h"
 #include "tengine.h"
 #include "common.h"
-#include "PR/os.h"
 
 INCLUDE_ASM(s32, "tengine", func_283E80);
 
 INCLUDE_ASM(s32, "tengine", func_284004);
 
-INCLUDE_ASM(s32, "tengine", func_284208);
+INCLUDE_ASM(s32, "tengine", CEngineApp__Construct);
 
+// OK besides minor regalloc (when loading gCFB) and some missing behavior (might be over-diffing)
+//#ifdef NON_MATCHING
+/*void CEngineApp__Main(CEngineApp* thisx) {
+    int32_t index;
+
+    InitializeSystemResources();
+    osCreateViManager(OS_PRIORITY_VIMGR);
+    osViBlack(1);
+
+    // if not NTSC or PAL, enter infinite loop
+    if ((osTvType - 1) >= OS_TV_MPAL) {
+        while(1);
+    }
+
+    CPool__Construct(&gPoolBuffers);
+    CPool__AllocateStandardBuffers(&gPoolBuffers);
+    osViSwapBuffer(gCFB[0]);
+    osViBlack(0);
+
+    if (osTvType == OS_TV_PAL) {
+        gRefreshRate = gRefreshRatePAL;
+    }
+    else {
+        gRefreshRate = gRefreshRateNTSC;
+    }
+
+    gGfxMsg = NULL;
+    gDisplayListCount = MAX_DISPLAY_LISTS;
+    gCurrentTick = 0;
+    gNumTicks0 = 0;
+    gNumTicks1 = 0;
+    gNumTicks2 = 0;
+    gNumTicks3 = 0;
+    gNumTicksPending = 0;
+    gCurrentTickWaiting = 0;
+    gNumTicksWaiting = 0;
+    gCurrentTickFinished = 0;
+    gCurrentFB = 0;
+    gPendingFB = 0;
+
+    CEngineApp__Construct(thisx);
+    SCSI_SetMessageFunc(func_287068);
+    // TODO: D_801282F0 is &gSysRCLoader->Queue
+    osSendMesg(&D_801282F0, (void*)0xBEEFDEAD, 0);
+
+    for (index = 0; index < gTotalFramebuffers; index++) {
+        memset(gCFB[index], 0, gScreenWidth * gScreenHeight * 2);
+    }
+
+    CCameraPool__Construct(&thisx->m_CameraPool);
+    CPlayerPool__Construct(&thisx->m_PlayerPool);
+    CCollisionInfo__Reset();
+
+    thisx->m_pStaticSegment = (void*)(CCache_GetFromLookupTable(0x18) & ~0xC0000000);
+
+    CCameraPool__NewGame(&thisx->m_CameraPool, 0);
+    CPlayerPool__NewGame(&thisx->m_PlayerPool, 0);
+
+    CScene__Construct(GetScene(), thisx->m_pStaticSegment);
+    func_26AEE0(&thisx->unk_0x28854);
+
+    if (gValidControllerBits == 0) {
+        InitControllers();
+    }
+
+    COnScreen__Construct(thisx->unk_0x1D7E0);
+
+    PAK_InitSystem();
+    func_41FBF8();
+    func_2523A4();
+    func_285FC4(thisx, 2);
+
+    while (1) {
+        osRecvMesg(&gGfxFrameMessageQueue, &gGfxMsg, OS_MESG_BLOCK);
+
+        switch (gGfxMsg->gen.type) {
+            case (OS_SC_RETRACE_MSG): {
+                CEngineApp__Retrace(thisx);
+                break;
+            }
+            case (OS_SC_DONE_MSG): {
+                if (gGfxMsg == &thisx->unk_0x00[0xF0]) {
+                    gFrameData = &thisx->unk_0x00[0xF0];
+                }
+                else if (gGfxMsg == &thisx->unk_0x00[0x138]) {
+                    gFrameData = &thisx->unk_0x00[0x138];
+                }
+                else if (gGfxMsg == &thisx->unk_0x00[0x270]) {
+                    gFrameData = &thisx->unk_0x00[0x270];
+                }
+
+                if (thisx->m_Mode == 3) {
+                    gDisplayListCount++;
+                }
+                else {
+                    CEngineApp__Update(thisx);
+                }
+                break;
+            }
+            case (OS_SC_PRE_NMI_MSG): {
+                gBootSignature[0] = '\0';
+
+                // Stop rumbles ?
+                func_252414(gGfxMsg);
+                func_25245C(0);
+
+                thisx->unk_0x287EC = 1; // m_FadeFast ?
+                func_286058(thisx, 3); // CEngineApp__SetupFadeTo ?
+                thisx->unk_0x28830 = 1; // m_bReset ?
+                break;
+            }
+        }
+    }
+}*/
+//#else
 INCLUDE_ASM(s32, "tengine", CEngineApp__Main);
+//#endif
 
 INCLUDE_ASM(s32, "tengine", func_2849BC);
 
@@ -23,25 +135,18 @@ INCLUDE_ASM(s32, "tengine", func_285024);
 
 INCLUDE_ASM(s32, "tengine", func_285424);
 
-INCLUDE_ASM(s32, "tengine", func_28577C);
+INCLUDE_ASM(s32, "tengine", CEngineApp__Update);
 
 void boot(void) {
     CEngineApp__Boot(GetApp());
 }
 
-// Codegen is different, but this matches
-/*#ifdef BAD_CODEGEN
 void CEngineApp__Boot(CEngineApp* thisx) {
     memset(gThreadStackIdle, THREAD_IDLE, STACKSIZE_IDLE);
     osCreateThread(&gThreadIdle, THREAD_IDLE, idle, 0, gThreadStackIdle + STACKSIZE_IDLE, gThreadPriorityIdleInit);
     osStartThread(&gThreadIdle);
 }
-#else*/
-INCLUDE_ASM(s32, "tengine", CEngineApp__Boot);
-//#endif
 
-// Codegen is different, but this matches
-/*#ifdef BAD_CODEGEN
 void CEngineApp__Idle(CEngineApp* thisx, void* arg) {
     memset(gThreadStackMain, THREAD_MAIN, STACKSIZE_MAIN);
 
@@ -52,9 +157,6 @@ void CEngineApp__Idle(CEngineApp* thisx, void* arg) {
 
     while (1) {}
 }
-#else*/
-INCLUDE_ASM(s32, "tengine", CEngineApp__Idle);
-//#endif
 
 INCLUDE_ASM(s32, "tengine", func_285CD8);
 
@@ -94,7 +196,7 @@ INCLUDE_ASM(s32, "tengine", func_286058);
 
 INCLUDE_ASM(s32, "tengine", func_28607C);
 
-INCLUDE_ASM(s32, "tengine", func_28620C);
+INCLUDE_ASM(s32, "tengine", CEngineApp__Retrace);
 
 INCLUDE_ASM(s32, "tengine", func_2862C8);
 

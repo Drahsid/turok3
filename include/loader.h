@@ -7,6 +7,12 @@
 
 #define LOADER_QUEUE_SIZE   512
 #define LOADER_ENTRY_COUNT  (LOADER_QUEUE_SIZE + 16)
+#define LOADER_DMA_COMPLETE_MESSAGE 2001
+
+enum {
+    LOADERFLAGS_UNALLOCATED = 0,
+    LOADERFLAGS_ALLOCATED = (1 << 0)
+};
 
 typedef struct CLoaderEntry {
     /* 0x00 */ void* address;
@@ -21,17 +27,20 @@ typedef struct CLoaderEntry {
 
 typedef struct {
     /* 0x0000 */ OSThread thread;
-    /* 0x01C0 */ OSMesgQueue queue;
-    /* 0x01DC */ OSMesg messages[512];
-    /* 0x09DC */ OSMesgQueue piReplyQueue;
-    /* 0x09F8 */ OSMesg piReplyMessage;
-    /* 0x09FC */ uint8_t stack[0x400];
-    /* 0x0DFC */ CLoaderEntry entries[LOADER_ENTRY_COUNT];
-    /* 0x4FFC */ CList freeList;
-    /* 0x5010 */ CList usedList;
-} CLoader; /* sizeof = 0x5024 */
+    /* 0x01C0 */ uint8_t unk_0x1C0[0x80];
+    /* 0x0240 */ OSMesgQueue queue;
+    /* 0x025C */ OSMesg messages[LOADER_QUEUE_SIZE];
+    /* 0x0A5C */ OSMesgQueue piReplyQueue;
+    /* 0x0A78 */ OSMesg piReplyMessage;
+    /* 0x0A7C */ uint32_t _pad; // stack is typed as u64[] in the source, which causes this alignment
+    /* 0x0A80 */ uint8_t stack[0x400];
+    /* 0x0E80 */ CLoaderEntry entries[LOADER_ENTRY_COUNT];
+    /* 0x5080 */ CList freeList;
+    /* 0x5094 */ CList usedList;
+} CLoader; /* sizeof = 0x50A8 */
 
 extern void CLoader__Construct(CLoader* thisx, OSId threadId);
+extern void CLoader__Main(CLoader* thisx);
 
 #endif
 

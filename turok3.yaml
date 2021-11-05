@@ -78,7 +78,7 @@ segments:
       - [0x3E090, c, cache]
       - [0x42F60, c, decompressor]
       - [0x434C0, c, heap]
-      - [0x43A40, asm]
+      - [0x43A40, c, list]
       - [0x44020, c, loader]
       - [0x44510, asm]
       - [0x445F0, c, sysrc]

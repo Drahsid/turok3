@@ -5,10 +5,7 @@
 #include "tengine.h"
 
 typedef uint32_t (*SCSI_MessageFunc)(uint32_t);
-
 extern uint32_t func_20A9E0(int32_t arg0);
-extern int32_t strcmp(const char* str0, const char* str1);
-extern char* strcpy(char* dest, const char* src);
 extern void* memset(void* ptr, int32_t value, uint32_t bytes);
 extern void boot();
 extern int32_t CCache_GetFromLookupTable(int32_t offset);

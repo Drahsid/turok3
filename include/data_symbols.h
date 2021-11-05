@@ -5,9 +5,11 @@
 #include "tengine.h"
 
 extern struct_D_800F20CC D_800F20CC[];
-extern int32_t gThreadPriorityIdle;
-extern int32_t gThreadPriorityIdleInit;
-extern int32_t gThreadPriorityMain;
+extern OSPri gThreadPriorityIdle;
+extern OSPri gThreadPriorityIdleInit;
+extern OSPri gThreadPriorityMain;
+extern OSPri gThreadPriorityLoader;
+extern OSPri gThreadPriorityScheduler;
 extern char gEngineTimestamp[256];
 extern char gEngineTimestampFormat[];
 extern char gEngineTimestampDate[];
@@ -41,7 +43,6 @@ extern uint32_t gTotalFramebuffers;
 extern uint8_t gValidControllerBits;
 extern OSMesg gGfxFrameMessageBuffer[];
 extern OSSched gScheduler;
-extern OSPri gThreadPriorityScheduler;
 extern OSScClient gGfxClient;
 extern Gfx* gDList;
 extern UNK_TYPE D_80166190;

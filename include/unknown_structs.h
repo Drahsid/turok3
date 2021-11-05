@@ -13,5 +13,17 @@ typedef struct {
     /* 0x18 */ int32_t unk_0x18;
 } struct_D_800F20CC; /* sizeof = 0x1C */
 
+typedef struct {
+    /* 0x000 */ uint8_t unk_0x00;
+    /* 0x001 */ uint8_t unk_0x01;
+    /* 0x002 */ uint8_t unk_0x02;
+    /* 0x003 */ uint8_t unk_0x03;
+    /* 0x004 */ uint8_t unk_0x04[0x350];
+    /* 0x354 */ uint8_t unk_0x354;
+    /* 0x355 */ uint8_t unk_0x355;
+    /* 0x366 */ uint8_t unk_0x356;
+    /* 0x357 */ uint8_t unk_0x357;
+} struct_D_80124ECD; /* sizeof = unk */
+
 #endif
 

@@ -3,15 +3,15 @@
 
 // Indexed set
 typedef struct {
-    /* 0x00 */ int m_BlockCount;
-    /* 0x04 */ int m_Offset;
+    /* 0x00 */ int32_t m_BlockCount;
+    /* 0x04 */ int32_t m_Offset;
 } CISet; /* sizeof = 0x8 */
 
 // Unindexed Set
 typedef struct {
-    /* 0x00 */ int m_BlockSize;
-    /* 0x04 */ int m_BlockCount;
-    /* 0x08 */ int m_Data;
+    /* 0x00 */ int32_t m_BlockSize;
+    /* 0x04 */ int32_t m_BlockCount;
+    /* 0x08 */ int32_t m_Data;
 } CUSet; /* sizeof = 0xC */
 
 #endif

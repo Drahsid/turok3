@@ -39,6 +39,16 @@ extern int32_t gScreenHeight;
 extern int32_t gScreenWidth;
 extern uint32_t gTotalFramebuffers;
 extern uint8_t gValidControllerBits;
+extern OSMesg gGfxFrameMessageBuffer[];
+extern OSSched gScheduler;
+extern OSPri gThreadPriorityScheduler;
+extern OSScClient gGfxClient;
+extern Gfx* gDList;
+extern UNK_TYPE D_80166190;
+extern uint32_t gFirstBoot;
+extern UNK_TYPE D_801659B0;
+extern float D_800FB0BC;
+extern struct_D_80124ECD D_80124ECD;
 
 #endif
 

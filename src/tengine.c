@@ -5,7 +5,68 @@ INCLUDE_ASM(s32, "tengine", func_283E80);
 
 INCLUDE_ASM(s32, "tengine", func_284004);
 
+// Only differences are register usage, and delay-slot optimization of the divus in the modulos; additionally D_80124ECD is part of some structure that I need to find the start of
+//#ifdef NON_MATCHING
+/*void CEngineApp__Construct(CEngineApp* thisx) {
+    uint32_t index;
+    CFrameData* frameData;
+
+    osCreateMesgQueue(&gGfxFrameMessageQueue, gGfxFrameMessageBuffer, 0x1000);
+    memset(gSchedulerStack, THREAD_SCHED, OS_SC_STACKSIZE);
+    osCreateScheduler(&gScheduler, (SIZE_TYPE)gSchedulerStack + OS_SC_STACKSIZE, gThreadPriorityScheduler, 0, 1);
+    osScAddClient(&gScheduler, &gGfxClient, &gGfxFrameMessageQueue);
+
+    thisx->m_LastMode = 0;
+
+    CEngineApp__InitFade(thisx);
+
+    gDList = NULLPTR;
+
+    func_2E4A60(&D_80166190);
+    if (gFirstBoot != 0) {
+        func_2526B0();
+        func_400000(&D_801659B0);
+    }
+
+    Cinema__Initialize();
+    func_44BBB0();
+    func_44BAF0(&thisx->unk_0x280E8[0x6F8]);
+    thisx->unk_0x28840 = -1;
+    thisx->unk_0x28830 = 0;
+    thisx->unk_0x28804 = 1;
+    thisx->unk_0x28808 = 0;
+    thisx->unk_0x2880C = 0;
+    thisx->unk_0x28810 = 0;
+    thisx->unk_0x28834 = 0;
+    thisx->unk_0x28844 = 0;
+    thisx->unk_0x28848 = 0;
+    thisx->unk_0x2884C = 0;
+    thisx->unk_0x2883C = 0;
+    thisx->unk_0x28850 = 0;
+    thisx->unk_0x2882C = D_800FB0BC;
+
+    D_80124ECD.unk_0x00 = 0;
+    D_80124ECD.unk_0x357 = (uint32_t)0; // storing a word at an unaligned address? how?
+
+    for (index = 0; index < gTotalFramebuffers; index++) {
+        int32_t next = (index + 1 + gTotalFramebuffers) % gTotalFramebuffers;
+        int32_t prev = (index - 1 + gTotalFramebuffers) % gTotalFramebuffers;
+
+        frameData = &thisx->m_FrameData[index];
+        frameData->m_Message.gen.type = OS_SC_DONE_MSG;
+        frameData->m_pFrameBuffer = gCFB[index];
+        frameData->m_pPrev = &thisx->m_FrameData[prev];
+        frameData->m_pNext = &thisx->m_FrameData[next];
+
+        CSunFrameData__Construct(&frameData->m_SunFrame);
+    }
+
+    CEngineApp__AdvanceFrameData(thisx);
+    Sound__Initialize();
+}*/
+//#else
 INCLUDE_ASM(s32, "tengine", CEngineApp__Construct);
+//#endif
 
 // OK besides minor regalloc (when loading gCFB) and some missing behavior (might be over-diffing)
 //#ifdef NON_MATCHING
@@ -158,7 +219,7 @@ void CEngineApp__Idle(CEngineApp* thisx, void* arg) {
     while (1) {}
 }
 
-INCLUDE_ASM(s32, "tengine", func_285CD8);
+INCLUDE_ASM(s32, "tengine", CEngineApp__AdvanceFrameData);
 
 INCLUDE_ASM(s32, "tengine", func_285DA8);
 
@@ -188,7 +249,7 @@ void mainproc(void* arg) {
     CEngineApp__Main(GetApp());
 }
 
-INCLUDE_ASM(s32, "tengine", func_285F94);
+INCLUDE_ASM(s32, "tengine", CEngineApp__InitFade);
 
 INCLUDE_ASM(s32, "tengine", func_285FC4);
 

@@ -37,6 +37,7 @@ extern uint8_t gThreadStackIdle[];
 extern uint8_t gThreadStackMain[];
 extern uint8_t gThreadStackBoot[];
 extern uint8_t gThreadStackAudio[];
+extern uint8_t gSchedulerStack[];
 
 #endif
 

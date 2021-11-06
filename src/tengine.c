@@ -16,7 +16,7 @@ INCLUDE_ASM(s32, "tengine", func_284004);
     osCreateScheduler(&gScheduler, (SIZE_TYPE)gSchedulerStack + OS_SC_STACKSIZE, gThreadPriorityScheduler, 0, 1);
     osScAddClient(&gScheduler, &gGfxClient, &gGfxFrameMessageQueue);
 
-    thisx->m_LastMode = 0;
+    thisx->lastMode = 0;
 
     CEngineApp__InitFade(thisx);
 
@@ -52,13 +52,13 @@ INCLUDE_ASM(s32, "tengine", func_284004);
         int32_t next = (index + 1 + gTotalFramebuffers) % gTotalFramebuffers;
         int32_t prev = (index - 1 + gTotalFramebuffers) % gTotalFramebuffers;
 
-        frameData = &thisx->m_FrameData[index];
-        frameData->m_Message.gen.type = OS_SC_DONE_MSG;
-        frameData->m_pFrameBuffer = gCFB[index];
-        frameData->m_pPrev = &thisx->m_FrameData[prev];
-        frameData->m_pNext = &thisx->m_FrameData[next];
+        frameData = &thisx->frameData[index];
+        frameData->message.gen.type = OS_SC_DONE_MSG;
+        frameData->frameBuffer = gCFB[index];
+        frameData->prev = &thisx->frameData[prev];
+        frameData->next = &thisx->frameData[next];
 
-        CSunFrameData__Construct(&frameData->m_SunFrame);
+        CSunFrameData__Construct(&frameData->sunFrameData);
     }
 
     CEngineApp__AdvanceFrameData(thisx);
@@ -117,16 +117,16 @@ INCLUDE_ASM(s32, "tengine", CEngineApp__Construct);
         memset(gCFB[index], 0, gScreenWidth * gScreenHeight * 2);
     }
 
-    CCameraPool__Construct(&thisx->m_CameraPool);
-    CPlayerPool__Construct(&thisx->m_PlayerPool);
+    CCameraPool__Construct(&thisx->cameraPool);
+    CPlayerPool__Construct(&thisx->playerPool);
     CCollisionInfo__Reset();
 
-    thisx->m_pStaticSegment = (void*)(CCache_GetFromLookupTable(0x18) & ~0xC0000000);
+    thisx->staticSegment = (void*)(CCache_GetFromLookupTable(0x18) & ~0xC0000000);
 
-    CCameraPool__NewGame(&thisx->m_CameraPool, 0);
-    CPlayerPool__NewGame(&thisx->m_PlayerPool, 0);
+    CCameraPool__NewGame(&thisx->cameraPool, 0);
+    CPlayerPool__NewGame(&thisx->playerPool, 0);
 
-    CScene__Construct(GetScene(), thisx->m_pStaticSegment);
+    CScene__Construct(GetScene(), thisx->staticSegment);
     func_26AEE0(&thisx->unk_0x28854);
 
     if (gValidControllerBits == 0) {
@@ -149,17 +149,17 @@ INCLUDE_ASM(s32, "tengine", CEngineApp__Construct);
                 break;
             }
             case (OS_SC_DONE_MSG): {
-                if (gGfxMsg == &thisx->unk_0x00[0xF0]) {
-                    gFrameData = &thisx->unk_0x00[0xF0];
+                if (gGfxMsg == &thisx->frameData[0].message) {
+                    gFrameData = &thisx->frameData[0];
                 }
-                else if (gGfxMsg == &thisx->unk_0x00[0x138]) {
-                    gFrameData = &thisx->unk_0x00[0x138];
+                else if (gGfxMsg == &thisx->frameData[1].message) {
+                    gFrameData = &thisx->frameData[1];
                 }
-                else if (gGfxMsg == &thisx->unk_0x00[0x270]) {
-                    gFrameData = &thisx->unk_0x00[0x270];
+                else if (gGfxMsg == &thisx->frameData[2].message) {
+                    gFrameData = &thisx->frameData[2];
                 }
 
-                if (thisx->m_Mode == 3) {
+                if (thisx->currentMode == 3) {
                     gDisplayListCount++;
                 }
                 else {
@@ -249,7 +249,16 @@ void mainproc(void* arg) {
     CEngineApp__Main(GetApp());
 }
 
+// Behaviorally matching; differences are delay slot optimization and register order (-g/3?)
+//#ifdef NON_MATCHING
+/*void CEngineApp__InitFade(CEngineApp* thisx) {
+    thisx->unk_0x28825 = 1;
+    thisx->fadeAlpha = 0;
+    thisx->unk_0x28824 = 0;
+}*/
+//#else
 INCLUDE_ASM(s32, "tengine", CEngineApp__InitFade);
+//#endif
 
 INCLUDE_ASM(s32, "tengine", func_285FC4);
 
@@ -257,7 +266,31 @@ INCLUDE_ASM(s32, "tengine", func_286058);
 
 INCLUDE_ASM(s32, "tengine", func_28607C);
 
+// Identical behavior, different regalloc (meh)
+//#ifdef NON_MATCHING
+/*void CEngineApp__Retrace(CEngineApp* thisx) {
+    if (gFirstFrame) {
+        gFirstFrame = 0;
+    }
+
+    func_2526E0();
+
+    if (gEngineModeTable[thisx->currentMode].retraceFunction != NULLPTR) {
+        gEngineModeTable[thisx->currentMode].retraceFunction(thisx);
+    }
+
+    if (thisx->currentMode != 3) {
+        if (gDisplayListCount) {
+            gDisplayListCount--;
+            CEngineApp__Update(thisx);
+        }
+    }
+
+    gRetraceCount++;
+}*/
+//#else
 INCLUDE_ASM(s32, "tengine", CEngineApp__Retrace);
+//#endif
 
 INCLUDE_ASM(s32, "tengine", func_2862C8);
 

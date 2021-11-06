@@ -41,8 +41,8 @@ GLOBAL_ASM_C_FILES := $(shell $(GREP) GLOBAL_ASM $(SRC_DIR) </dev/null 2>/dev/nu
 GLOBAL_ASM_O_FILES := $(foreach file,$(GLOBAL_ASM_C_FILES),$(BUILD_DIR)/$(file).o)
 
 DFLAGS := -D_LANGUAGE_C -DF3DEX_GBI_2 -D__GNUC__=2
-# original compiler had these default options: -fpeephole -ffunction-cse -fkeep-static-consts -fpcc-struct-return -fcommon -fverbose-asm -fgnu-linker -mgas -meb -mcpu=R4300
-CFLAGS := -G 0 -mips3 -mgp32 -mfp32 -mcpu=R4300 $(OPT_FLAGS) -fno-common -fgnu-linker -mgas
+# T2's original compiler had these default options: -mgas -meb -mcpu=R4300
+CFLAGS := -G 0 -mips3 -mcpu=R4300 $(OPT_FLAGS) -fgnu-linker
 CPPFLAGS := -P -undef -Wall -lang-c $(DFLAGS) $(INCLUDE_CFLAGS) -nostdinc
 LDFLAGS := -T $(LD_SCRIPT) -Map $(TARGET).map -T undefined_syms_auto.txt -T undefined_funcs_auto.txt -T undefined_funcs.txt -T undefined_syms.txt --no-check-sections
 

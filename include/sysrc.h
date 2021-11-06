@@ -5,9 +5,9 @@
 #include "loader.h"
 #include "decompressor.h"
 
-extern CHeap gHeap;
-extern CLoader gLoader;
-extern CDecompressor gDecompressor;
+extern CHeap gHeap; // "sysrc_heap"
+extern CLoader gLoader; // "sysrc_loader"
+extern CDecompressor gDecompressor; // "sysrc_decompressor"
 
 #define GetHeap() (&gHeap)
 #define GetLoader() (&gLoader)

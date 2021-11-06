@@ -8,6 +8,7 @@
 #ifndef INCLUDE_ASM
 #define INCLUDE_ASM(TYPE, FOLDER, NAME, ARGS...) \
    __asm__( \
+        ".set fp=64\n"\
         ".section .text\n" \
         "\t.align\t2\n" \
         "\t.globl\t"#NAME"\n" \

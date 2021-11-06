@@ -1,6 +1,3 @@
-[submodule "tools/splat"]
-	path = tools/splat
-	url = https://github.com/ethteck/splat.git
 [submodule "tools/mips_to_c"]
 	path = tools/mips_to_c
 	url = https://github.com/matt-kempster/mips_to_c.git
@@ -13,3 +10,6 @@
 [submodule "libreultra"]
 	path = libreultra
 	url = https://github.com/n64decomp/libreultra.git
+[submodule "tools/splat"]
+	path = tools/splat
+	url = https://github.com/Drahsid/splat.git

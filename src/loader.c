@@ -12,8 +12,8 @@ void CLoader__Construct(CLoader* thisx, OSId threadId) {
 
     osSetEventMesg(OS_EVENT_PI, &thisx->piReplyQueue, LOADER_DMA_COMPLETE_MESSAGE);
 
-    CList__Construct(&thisx->freeList, OFFSETOF(CLoaderEntry, pLast), OFFSETOF(CLoaderEntry, pNext));
-    CList__Construct(&thisx->usedList, OFFSETOF(CLoaderEntry, pLast), OFFSETOF(CLoaderEntry, pNext));
+    CList__Construct(&thisx->freeList, OFFSETOF(CLoaderEntry, prev), OFFSETOF(CLoaderEntry, next));
+    CList__Construct(&thisx->usedList, OFFSETOF(CLoaderEntry, prev), OFFSETOF(CLoaderEntry, next));
 
     for (index = 0; index < LOADER_ENTRY_COUNT; index++) {
         entry = &thisx->entries[index];

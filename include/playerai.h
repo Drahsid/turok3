@@ -6,11 +6,11 @@
 
 typedef struct {
     /* 0x00 */ uint32_t unk_0x00;
-    /* 0x04 */ void* m_pPlayers[4];
-    /* 0x14 */ int32_t m_nPlayers;
-    /* 0x18 */ CList m_FreeList;
-    /* 0x2C */ CList m_ActiveList;
-    /* 0x40 */ uint32_t m_nNumActive;
+    /* 0x04 */ struct CPlayer* players[4]; // "m_Players" TODO: declare CPlayer struct
+    /* 0x14 */ int32_t playerCount; // "m_nPlayers"
+    /* 0x18 */ CList freeList; // "m_FreeList"
+    /* 0x2C */ CList activeList; // "m_ActiveList"
+    /* 0x40 */ uint32_t activeCount;
 } CPlayerPool; /* sizeof = 0x44 */
 
 #endif

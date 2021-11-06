@@ -8,6 +8,7 @@ options:
   find_file_boundaries: True
   platform: n64
   generated_c_preamble: "#include \"include_asm.h\""
+  generated_s_preamble: ".set fp=64"
 segments:
   - name: header
     type: header
@@ -93,7 +94,7 @@ segments:
       - [0x4FBA0, asm]
       - [0x51630, asm]
       - [0x51700, asm]
-      - [0x532B0, asm]
+      - [0x532B0, c, crash]
       - [0x53490, c, defs]
       - [0x53FA0, asm]
       - [0x57750, asm]
@@ -289,6 +290,12 @@ segments:
       - [0xF2D80, rodata, main]
       - [0x100A00, data, main]
       - [0x100A20, bin] # data, rodata, and many megabytes of other data
+  - name: virtual # RNC compressed code, data, and rodata that gets swapped in and out of memory as needed; _virtual_org
+    type: code # We have limited options for how to manage this, but inevitably we have to decompress the split files, and recompress the reconstructed code
+    start: 0x115760
+    vram: 0x00400500
+    subsegments:
+      - [0x115760, bin]
   - name: cartdata
     type: bin
     start: 0xDD5934

@@ -12,7 +12,8 @@ void func_283D7C(void) {
 
 // Behaviorally equal; CVector3__Normalize is inlined, which seems to effect codegen (stack and regalloc)
 //#ifdef NON_MATCHING
-/*void CSun__SetSunDir(CSun* thisx, CVector3* dir) {
+/*
+void CSun__SetSunDir(CSun* thisx, CVector3* dir) {
     float length;
     float norm;
 
@@ -25,7 +26,8 @@ void func_283D7C(void) {
         (&thisx->m_vDir)->y *= norm;
         (&thisx->m_vDir)->z *= norm;
     }
-}*/
+}
+*/
 //#else
 INCLUDE_ASM(s32, "sun", CSun__SetSunDir);
 //#endif

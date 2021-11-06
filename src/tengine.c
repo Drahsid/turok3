@@ -7,7 +7,8 @@ INCLUDE_ASM(s32, "tengine", func_284004);
 
 // Only differences are register usage, and delay-slot optimization of the divus in the modulos; additionally D_80124ECD is part of some structure that I need to find the start of
 //#ifdef NON_MATCHING
-/*void CEngineApp__Construct(CEngineApp* thisx) {
+/*
+void CEngineApp__Construct(CEngineApp* thisx) {
     uint32_t index;
     CFrameData* frameData;
 
@@ -63,14 +64,16 @@ INCLUDE_ASM(s32, "tengine", func_284004);
 
     CEngineApp__AdvanceFrameData(thisx);
     Sound__Initialize();
-}*/
+}
+*/
 //#else
 INCLUDE_ASM(s32, "tengine", CEngineApp__Construct);
 //#endif
 
 // OK besides minor regalloc (when loading gCFB) and some missing behavior (might be over-diffing)
 //#ifdef NON_MATCHING
-/*void CEngineApp__Main(CEngineApp* thisx) {
+/*
+void CEngineApp__Main(CEngineApp* thisx) {
     int32_t index;
 
     InitializeSystemResources();
@@ -181,7 +184,8 @@ INCLUDE_ASM(s32, "tengine", CEngineApp__Construct);
             }
         }
     }
-}*/
+}
+*/
 //#else
 INCLUDE_ASM(s32, "tengine", CEngineApp__Main);
 //#endif
@@ -221,7 +225,8 @@ void CEngineApp__Idle(CEngineApp* thisx, void* arg) {
 
 // OK besides pesky delay slot optimizations. More evidence the game was built with -g/3?
 //#ifdef NON_MATCHING
-/*void CEngineApp__AdvanceFrameData(CEngineApp* thisx) {
+/*
+void CEngineApp__AdvanceFrameData(CEngineApp* thisx) {
     gFrameCount++;
     gFrameCountGameplay++;
     gEvenOdd ^= 1;
@@ -229,7 +234,8 @@ void CEngineApp__Idle(CEngineApp* thisx, void* arg) {
     thisx->currentFrameData = &thisx->frameData[gFrameCount % gTotalFramebuffers];
     thisx->currentFrameData->displayListHead = gEvenOdd ? gDisplayList0 : gDisplayList1;
     thisx->currentFrameData->lineListHead = gEvenOdd ? gLineList0 : gLineList1;
-}*/
+}
+*/
 //#else
 INCLUDE_ASM(s32, "tengine", CEngineApp__AdvanceFrameData);
 //#endif
@@ -264,11 +270,13 @@ void mainproc(void* arg) {
 
 // Behaviorally matching; differences are delay slot optimization and register order (-g/3?)
 //#ifdef NON_MATCHING
-/*void CEngineApp__InitFade(CEngineApp* thisx) {
+/*
+void CEngineApp__InitFade(CEngineApp* thisx) {
     thisx->unk_0x28825 = 1;
     thisx->fadeAlpha = 0;
     thisx->unk_0x28824 = 0;
-}*/
+}
+*/
 //#else
 INCLUDE_ASM(s32, "tengine", CEngineApp__InitFade);
 //#endif
@@ -281,7 +289,8 @@ INCLUDE_ASM(s32, "tengine", func_28607C);
 
 // Identical behavior, different regalloc (meh)
 //#ifdef NON_MATCHING
-/*void CEngineApp__Retrace(CEngineApp* thisx) {
+/*
+void CEngineApp__Retrace(CEngineApp* thisx) {
     if (gFirstFrame) {
         gFirstFrame = 0;
     }
@@ -300,7 +309,8 @@ INCLUDE_ASM(s32, "tengine", func_28607C);
     }
 
     gRetraceCount++;
-}*/
+}
+*/
 //#else
 INCLUDE_ASM(s32, "tengine", CEngineApp__Retrace);
 //#endif

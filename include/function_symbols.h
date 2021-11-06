@@ -32,6 +32,8 @@ extern void func_41FBF8(void);
 extern uint32_t func_287068(uint32_t);
 extern void VM_Initialize(char*, char*);
 extern void CCache__Construct(OSId threadId);
+extern void func_232A68(void);
+extern void func_232B00(void);
 
 #endif
 

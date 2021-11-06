@@ -1,6 +1,65 @@
-#include "include_asm.h"
+#include "common.h"
+#include "cinema.h"
 
+// Differences seem to be relevant to optimization of D_800F8D60; it is likely an immediate rvalue, and not data to-be loaded
+//#ifdef NON_MATCHING
+/*
+void Cinema__Initialize(void) {
+    gCinemaPlayerP->unk_0x00 = 0;
+    gCinemaPlayerP->unk_0x04 = 0;
+    gCinemaPlayerP->unk_0x08 = 0;
+    gCinemaPlayerP->unk_0x0C = 0;
+    gCinemaPlayerP->unk_0x10 = 0;
+    gCinemaPlayerP->unk_0x14 = 0;
+    gCinemaPlayerP->unk_0x18 = 0;
+    gCinemaPlayerP->unk_0x1C = 0;
+    gCinemaPlayerP->unk_0x20 = 0;
+    gCinemaPlayerP->unk_0x24 = 0;
+    gCinemaPlayerP->unk_0x28 = 0;
+    gCinemaPlayerP->unk_0x2C = 0;
+    gCinemaPlayerP->unk_0x30 = 0;
+    gCinemaPlayerP->unk_0x34 = 0;
+    gCinemaPlayerP->unk_0x38 = 0;
+    gCinemaPlayerP->unk_0x3C = 0;
+    gCinemaPlayerP->unk_0x40 = 0;
+    gCinemaPlayerP->unk_0x44 = 0;
+    gCinemaPlayerP->unk_0x48 = 0;
+    gCinemaPlayerP->unk_0x4C = 0;
+    gCinemaPlayerP->unk_0x50 = 0;
+    gCinemaPlayerP->unk_0x54 = 0;
+    gCinemaPlayerP->unk_0x58 = 0;
+    gCinemaPlayerP->unk_0x5C = 0;
+    gCinemaPlayerP->unk_0x60 = 0;
+    gCinemaPlayerP->unk_0x64 = 0;
+    gCinemaPlayerP->unk_0xB4 = 0;
+    gCinemaPlayerP->unk_0xB8 = 0;
+    gCinemaPlayerP->lastWarpId = -1;
+    gCinemaPlayerP->lastLevel = -1;
+    gCinemaPlayerP->unk_0xC4 = 0;
+    gCinemaPlayerP->unk_0xC8 = 0;
+    gCinemaPlayerP->unk_0xCC = 0;
+    gCinemaPlayerP->unk_0xD0 = 0;
+    gCinemaPlayerP->unk_0xD4 = 0;
+    gCinemaPlayerP->requestedLevel = -1;
+    gCinemaPlayerP->requestedCinema = -1;
+    gCinemaPlayerP->requestedType = -1;
+    gCinemaPlayerP->unk_0xE4 = 0;
+    gCinemaPlayerP->unk_0xE8 = 0;
+    gCinemaPlayerP->unk_0xEC = 0;
+    gCinemaPlayerP->unk_0xF0 = 0;
+    gCinemaPlayerP->unk_0xF4 = 0;
+    gCinemaPlayerP->unk_0xF8 = 0;
+    gCinemaPlayerP->unk_0xFC = 0;
+    gCinemaPlayerP->unk_0x100 = 0;
+    gCinemaPlayerP->unk_0x104 = D_800F8D60; // this is probably an immediate float; rodata
+    gCinemaPlayerP->unk_0x108 = 0;
+    func_232A68();
+    func_232B00();
+}
+*/
+//#else
 INCLUDE_ASM(s32, "cinema", Cinema__Initialize);
+//#endif
 
 INCLUDE_ASM(s32, "cinema", func_231B74);
 

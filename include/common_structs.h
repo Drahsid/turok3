@@ -5,7 +5,7 @@ typedef struct {
     /* 0x00 */ float x;
     /* 0x04 */ float y;
     /* 0x08 */ float z;
-} CVector3; /* sizeof = 0xC */
+} CVector3; /* sizeof = 0x0C */
 
 typedef float CMtxF[4][4]; /* sizeof = 0x40 */
 

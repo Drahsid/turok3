@@ -15,7 +15,8 @@ INCLUDE_ASM(s32, "main", func_20AA08);
 // loading of "systembootdone" string, (particularly bzero in place of the memset for setting the null character... but why JAL for one byte?)
 // additionally, missing behavior in bss clearing function
 //#ifdef NON_MATCHING
-/*uint32_t gFirstBoot;
+/*
+uint32_t gFirstBoot;
 char gBootSignature[16] = "BootNotDone";
 
 int32_t main(void) {
@@ -68,7 +69,8 @@ int32_t main(void) {
     boot();
 
     return 0;
-}*/
+}
+*/
 //#else
 INCLUDE_ASM(s32, "main", main);
 //#endif

@@ -23,8 +23,8 @@ enum {
     THREAD_AUDIO
 };
 
-extern OSThread gThreadIdle;
-extern OSThread gThreadMain;
+extern OSThread gThreadIdle; // "idleThread"
+extern OSThread gThreadMain; // "mainThread"
 
 // stacks
 #define	STACKSIZE_IDLE  (0x0080)
@@ -32,12 +32,11 @@ extern OSThread gThreadMain;
 #define	STACKSIZE_MAIN  (0x8000)
 #define	STACKSIZE_AUDIO (0x4000)
 
-extern uint8_t gThreadStackSched[];
-extern uint8_t gThreadStackIdle[];
-extern uint8_t gThreadStackMain[];
-extern uint8_t gThreadStackBoot[];
-extern uint8_t gThreadStackAudio[];
-extern uint8_t gSchedulerStack[];
+extern uint8_t gSchedulerStack[]; // "schedule_stack"
+extern uint8_t gThreadStackIdle[]; // "idle_thread_stack"
+extern uint8_t gThreadStackMain[]; // "main_thread_stack"
+extern uint8_t gThreadStackBoot[]; // "boot_stack"
+extern uint8_t gThreadStackAudio[]; // "audio_stack"
 
 #endif
 

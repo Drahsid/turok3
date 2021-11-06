@@ -32,7 +32,8 @@ INCLUDE_ASM(s32, "loader", func_2435F4);
 
 // OK except for delay slot optimization and flipped register loads (regalloc is the same, behavior is flipped)
 //#ifdef NON_MATCHING
-/*void CLoader__Main(CLoader* thisx) {
+/*
+void CLoader__Main(CLoader* thisx) {
     CLoaderEntry* entry;
     OSMesg* dummy;
     OSTimer timer;
@@ -61,7 +62,8 @@ INCLUDE_ASM(s32, "loader", func_2435F4);
             CLoader__DeallocLoaderEntry(thisx, entry);
         }
     }
-}*/
+}
+*/
 //#else
 INCLUDE_ASM(s32, "loader", CLoader__Main);
 //#endif

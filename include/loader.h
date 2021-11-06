@@ -41,6 +41,7 @@ typedef struct {
 
 extern void CLoader__Construct(CLoader* thisx, OSId threadId);
 extern void CLoader__Main(CLoader* thisx);
+extern void CLoader__DeallocLoaderEntry(CLoader* thisx, CLoaderEntry* entry);
 
 #endif
 

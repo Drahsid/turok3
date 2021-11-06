@@ -47,7 +47,7 @@ segments:
       - [0x12A90, asm]
       - [0x16EA0, asm]
       - [0x17120, asm]
-      - [0x172F0, asm]
+      - [0x172F0, c, scsi_c]
       - [0x1B400, asm]
       - [0x1B7B0, asm]
       - [0x1B7D0, asm]

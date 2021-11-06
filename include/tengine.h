@@ -110,21 +110,25 @@ extern int32_t gNumTicksWaiting;            // "n_waiting"
 extern int32_t gCurrentTickFinished;        // "c_finished"
 extern int32_t gCurrentFB;                  // "p_current_fb"
 extern int32_t gPendingFB;                  // "p_pending_fb"
+extern uint32_t gFrameCount;                // "frame_number"
+extern uint32_t gEvenOdd;                   // "even_odd"
+extern uint32_t gFrameCountGameplay;        // "game_frame_number"
 extern uint32_t gRetraceCount;              // "retrace_count"
 extern float gRefreshRate;                  // "refresh_rate"
 extern CEngineModeInfo gEngineModeTable[];  // "EngineModeTable"
 
 
+extern void CEngineApp__Construct(CEngineApp* thisx);
 extern void CEngineApp__Main(CEngineApp* thisx);
+extern void CEngineApp__Update(CEngineApp* thisx);
 extern void boot(void);
 extern void CEngineApp__Boot(CEngineApp* thisx);
 extern void CEngineApp__Idle(CEngineApp* thisx, void* arg);
+extern void CEngineApp__AdvanceFrameData(CEngineApp* thisx);
 extern void idle(void* arg);
 extern void mainproc(void* arg);
-
-extern void CEngineApp__Construct(CEngineApp* thisx);
+extern void CEngineApp__InitFade(CEngineApp* thisx);
 extern void CEngineApp__Retrace(CEngineApp* thisx);
-extern void CEngineApp__Update(CEngineApp* thisx);
 
 #endif
 

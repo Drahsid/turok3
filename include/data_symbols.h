@@ -19,11 +19,15 @@ extern OSMesgQueue D_801282F0; // REMOVEME: D_801282F0 is &gSysRCLoader->Queue
 extern char gBootSignature[];
 extern void* gCFB[];
 extern uint32_t gPoolBuffers; // TODO: declare CPool struct
-extern float gRefreshRateNTSC;
-extern float gRefreshRatePAL;
+extern const float gRefreshRateNTSC;
+extern const float gRefreshRatePAL;
 extern int32_t gScreenHeight;
 extern int32_t gScreenWidth;
 extern uint32_t gTotalFramebuffers;
+extern Gfx* gDisplayList0;
+extern Gfx* gDisplayList1;
+extern Gfx* gLineList0;
+extern Gfx* gLineList1;
 extern uint8_t gValidControllerBits;
 extern Gfx* gDList;
 extern UNK_TYPE D_80166190;

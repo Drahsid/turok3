@@ -219,7 +219,20 @@ void CEngineApp__Idle(CEngineApp* thisx, void* arg) {
     while (1) {}
 }
 
+// OK besides pesky delay slot optimizations. More evidence the game was built with -g/3?
+//#ifdef NON_MATCHING
+/*void CEngineApp__AdvanceFrameData(CEngineApp* thisx) {
+    gFrameCount++;
+    gFrameCountGameplay++;
+    gEvenOdd ^= 1;
+
+    thisx->currentFrameData = &thisx->frameData[gFrameCount % gTotalFramebuffers];
+    thisx->currentFrameData->displayListHead = gEvenOdd ? gDisplayList0 : gDisplayList1;
+    thisx->currentFrameData->lineListHead = gEvenOdd ? gLineList0 : gLineList1;
+}*/
+//#else
 INCLUDE_ASM(s32, "tengine", CEngineApp__AdvanceFrameData);
+//#endif
 
 INCLUDE_ASM(s32, "tengine", func_285DA8);
 
@@ -332,7 +345,7 @@ INCLUDE_ASM(s32, "tengine", func_28714C);
 
 INCLUDE_ASM(s32, "tengine", func_287218);
 
-INCLUDE_ASM(s32, "tengine", func_287234);
+INCLUDE_ASM(s32, "tengine", CTexModSet__IsActive); // this is in texmod.c, file split above here somewhere
 
 INCLUDE_ASM(s32, "tengine", func_287258);
 

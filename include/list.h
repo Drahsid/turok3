@@ -11,8 +11,13 @@ typedef struct {
     /* 0x10 */ uint32_t size; // "Size"
 } CList; /* sizeof = 0x14 */
 
+#define CList__GetLast(THIS, ENTRY) (*((void**)(((SIZE_TYPE)(ENTRY)) + (THIS)->lastOffset)))
+#define CList__GetNext(THIS, ENTRY) (*((void**)(((SIZE_TYPE)(ENTRY)) + (THIS)->nextOffset)))
+
 extern void CList__Construct(CList* thisx, uint32_t lastOffset, uint32_t nextOffset);
+extern void CList__AddHead(CList* thisx, void* entry);
 extern void CList__AddTail(CList* thisx, void* entry);
+extern void CList__Remove(CList* thisx, void* entry);
 
 #endif
 

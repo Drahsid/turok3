@@ -1,13 +1,12 @@
 #include "tengine.h"
 #include "common.h"
 
-INCLUDE_ASM(s32, "tengine", func_283E80);
+INCLUDE_ASM("asm/nonmatchings/tengine/", func_283E80);
 
-INCLUDE_ASM(s32, "tengine", func_284004);
+INCLUDE_ASM("asm/nonmatchings/tengine/", func_284004);
 
 // Only differences are register usage, and delay-slot optimization of the divus in the modulos; additionally D_80124ECD is part of some structure that I need to find the start of
-//#ifdef NON_MATCHING
-/*
+#ifdef NON_MATCHING
 void CEngineApp__Construct(CEngineApp* thisx) {
     uint32_t index;
     CFrameData* frameData;
@@ -65,14 +64,12 @@ void CEngineApp__Construct(CEngineApp* thisx) {
     CEngineApp__AdvanceFrameData(thisx);
     Sound__Initialize();
 }
-*/
-//#else
-INCLUDE_ASM(s32, "tengine", CEngineApp__Construct);
-//#endif
+#else
+INCLUDE_ASM("asm/nonmatchings/tengine/", CEngineApp__Construct);
+#endif
 
 // OK besides minor regalloc (when loading gCFB) and some missing behavior (might be over-diffing)
-//#ifdef NON_MATCHING
-/*
+#ifdef NON_MATCHING
 void CEngineApp__Main(CEngineApp* thisx) {
     int32_t index;
 
@@ -185,22 +182,21 @@ void CEngineApp__Main(CEngineApp* thisx) {
         }
     }
 }
-*/
-//#else
-INCLUDE_ASM(s32, "tengine", CEngineApp__Main);
-//#endif
+#else
+INCLUDE_ASM("asm/nonmatchings/tengine/", CEngineApp__Main);
+#endif
 
-INCLUDE_ASM(s32, "tengine", func_2849BC);
+INCLUDE_ASM("asm/nonmatchings/tengine/", func_2849BC);
 
-INCLUDE_ASM(s32, "tengine", func_284B80);
+INCLUDE_ASM("asm/nonmatchings/tengine/", func_284B80);
 
-INCLUDE_ASM(s32, "tengine", func_284D7C);
+INCLUDE_ASM("asm/nonmatchings/tengine/", func_284D7C);
 
-INCLUDE_ASM(s32, "tengine", func_285024);
+INCLUDE_ASM("asm/nonmatchings/tengine/", func_285024);
 
-INCLUDE_ASM(s32, "tengine", func_285424);
+INCLUDE_ASM("asm/nonmatchings/tengine/", func_285424);
 
-INCLUDE_ASM(s32, "tengine", CEngineApp__Update);
+INCLUDE_ASM("asm/nonmatchings/tengine/", CEngineApp__Update);
 
 void boot(void) {
     CEngineApp__Boot(GetApp());
@@ -224,8 +220,7 @@ void CEngineApp__Idle(CEngineApp* thisx, void* arg) {
 }
 
 // OK besides pesky delay slot optimizations. More evidence the game was built with -g/3?
-//#ifdef NON_MATCHING
-/*
+#ifdef NON_MATCHING
 void CEngineApp__AdvanceFrameData(CEngineApp* thisx) {
     gFrameCount++;
     gFrameCountGameplay++;
@@ -235,20 +230,19 @@ void CEngineApp__AdvanceFrameData(CEngineApp* thisx) {
     thisx->currentFrameData->displayListHead = gEvenOdd ? gDisplayList0 : gDisplayList1;
     thisx->currentFrameData->lineListHead = gEvenOdd ? gLineList0 : gLineList1;
 }
-*/
-//#else
-INCLUDE_ASM(s32, "tengine", CEngineApp__AdvanceFrameData);
-//#endif
+#else
+INCLUDE_ASM("asm/nonmatchings/tengine/", CEngineApp__AdvanceFrameData);
+#endif
 
-INCLUDE_ASM(s32, "tengine", func_285DA8);
+INCLUDE_ASM("asm/nonmatchings/tengine/", func_285DA8);
 
-INCLUDE_ASM(s32, "tengine", func_285DC4);
+INCLUDE_ASM("asm/nonmatchings/tengine/", func_285DC4);
 
-INCLUDE_ASM(s32, "tengine", func_285E00);
+INCLUDE_ASM("asm/nonmatchings/tengine/", func_285E00);
 
-INCLUDE_ASM(s32, "tengine", func_285E50);
+INCLUDE_ASM("asm/nonmatchings/tengine/", func_285E50);
 
-INCLUDE_ASM(s32, "tengine", func_285EFC);
+INCLUDE_ASM("asm/nonmatchings/tengine/", func_285EFC);
 
 void idle(void* arg) {
     CEngineApp__Idle(GetApp(), arg);
@@ -269,27 +263,24 @@ void mainproc(void* arg) {
 }
 
 // Behaviorally matching; differences are delay slot optimization and register order (-g/3?)
-//#ifdef NON_MATCHING
-/*
+#ifdef NON_MATCHING
 void CEngineApp__InitFade(CEngineApp* thisx) {
     thisx->unk_0x28825 = 1;
     thisx->fadeAlpha = 0;
     thisx->unk_0x28824 = 0;
 }
-*/
-//#else
-INCLUDE_ASM(s32, "tengine", CEngineApp__InitFade);
-//#endif
+#else
+INCLUDE_ASM("asm/nonmatchings/tengine/", CEngineApp__InitFade);
+#endif
 
-INCLUDE_ASM(s32, "tengine", func_285FC4);
+INCLUDE_ASM("asm/nonmatchings/tengine/", func_285FC4);
 
-INCLUDE_ASM(s32, "tengine", func_286058);
+INCLUDE_ASM("asm/nonmatchings/tengine/", func_286058);
 
-INCLUDE_ASM(s32, "tengine", func_28607C);
+INCLUDE_ASM("asm/nonmatchings/tengine/", func_28607C);
 
 // Identical behavior, different regalloc (meh)
-//#ifdef NON_MATCHING
-/*
+#ifdef NON_MATCHING
 void CEngineApp__Retrace(CEngineApp* thisx) {
     if (gFirstFrame) {
         gFirstFrame = 0;
@@ -310,79 +301,78 @@ void CEngineApp__Retrace(CEngineApp* thisx) {
 
     gRetraceCount++;
 }
-*/
-//#else
-INCLUDE_ASM(s32, "tengine", CEngineApp__Retrace);
-//#endif
+#else
+INCLUDE_ASM("asm/nonmatchings/tengine/", CEngineApp__Retrace);
+#endif
 
-INCLUDE_ASM(s32, "tengine", func_2862C8);
+INCLUDE_ASM("asm/nonmatchings/tengine/", func_2862C8);
 
-INCLUDE_ASM(s32, "tengine", func_28635C);
+INCLUDE_ASM("asm/nonmatchings/tengine/", func_28635C);
 
-INCLUDE_ASM(s32, "tengine", func_286438);
+INCLUDE_ASM("asm/nonmatchings/tengine/", func_286438);
 
-INCLUDE_ASM(s32, "tengine", func_286520);
+INCLUDE_ASM("asm/nonmatchings/tengine/", func_286520);
 
-INCLUDE_ASM(s32, "tengine", func_28653C);
+INCLUDE_ASM("asm/nonmatchings/tengine/", func_28653C);
 
-INCLUDE_ASM(s32, "tengine", func_286574);
+INCLUDE_ASM("asm/nonmatchings/tengine/", func_286574);
 
-INCLUDE_ASM(s32, "tengine", func_2865C4);
+INCLUDE_ASM("asm/nonmatchings/tengine/", func_2865C4);
 
-INCLUDE_ASM(s32, "tengine", func_286610);
+INCLUDE_ASM("asm/nonmatchings/tengine/", func_286610);
 
 void func_286798(void) {
 }
 
-INCLUDE_ASM(s32, "tengine", func_2867A0);
+INCLUDE_ASM("asm/nonmatchings/tengine/", func_2867A0);
 
-INCLUDE_ASM(s32, "tengine", func_286808);
+INCLUDE_ASM("asm/nonmatchings/tengine/", func_286808);
 
 void func_2868BC(void) {
 }
 
-INCLUDE_ASM(s32, "tengine", func_2868C4);
+INCLUDE_ASM("asm/nonmatchings/tengine/", func_2868C4);
 
-INCLUDE_ASM(s32, "tengine", func_2868FC);
+INCLUDE_ASM("asm/nonmatchings/tengine/", func_2868FC);
 
-INCLUDE_ASM(s32, "tengine", func_286930);
+INCLUDE_ASM("asm/nonmatchings/tengine/", func_286930);
 
-INCLUDE_ASM(s32, "tengine", func_286B90);
+INCLUDE_ASM("asm/nonmatchings/tengine/", func_286B90);
 
-INCLUDE_ASM(s32, "tengine", func_287068);
+INCLUDE_ASM("asm/nonmatchings/tengine/", func_287068);
 
-INCLUDE_ASM(s32, "tengine", func_28714C);
+INCLUDE_ASM("asm/nonmatchings/tengine/", func_28714C);
 
-INCLUDE_ASM(s32, "tengine", func_287218);
+INCLUDE_ASM("asm/nonmatchings/tengine/", func_287218);
 
-INCLUDE_ASM(s32, "tengine", CTexModSet__IsActive); // this is in texmod.c, file split above here somewhere
+INCLUDE_ASM("asm/nonmatchings/tengine/", CTexModSet__IsActive); // this is in texmod.c, file split above here somewhere
 
-INCLUDE_ASM(s32, "tengine", func_287258);
+INCLUDE_ASM("asm/nonmatchings/tengine/", func_287258);
 
-INCLUDE_ASM(s32, "tengine", func_287318);
+INCLUDE_ASM("asm/nonmatchings/tengine/", func_287318);
 
-INCLUDE_ASM(s32, "tengine", func_2873D8);
+INCLUDE_ASM("asm/nonmatchings/tengine/", func_2873D8);
 
-INCLUDE_ASM(s32, "tengine", func_287458);
+INCLUDE_ASM("asm/nonmatchings/tengine/", func_287458);
 
-INCLUDE_ASM(s32, "tengine", func_2874FC);
+INCLUDE_ASM("asm/nonmatchings/tengine/", func_2874FC);
 
-INCLUDE_ASM(s32, "tengine", func_287518);
+INCLUDE_ASM("asm/nonmatchings/tengine/", func_287518);
 
-INCLUDE_ASM(s32, "tengine", func_287564);
+INCLUDE_ASM("asm/nonmatchings/tengine/", func_287564);
 
-INCLUDE_ASM(s32, "tengine", func_2875B0);
+INCLUDE_ASM("asm/nonmatchings/tengine/", func_2875B0);
 
-INCLUDE_ASM(s32, "tengine", func_2875FC);
+INCLUDE_ASM("asm/nonmatchings/tengine/", func_2875FC);
 
-INCLUDE_ASM(s32, "tengine", func_2876A0);
+INCLUDE_ASM("asm/nonmatchings/tengine/", func_2876A0);
 
-INCLUDE_ASM(s32, "tengine", func_287720);
+INCLUDE_ASM("asm/nonmatchings/tengine/", func_287720);
 
-INCLUDE_ASM(s32, "tengine", func_287730);
+INCLUDE_ASM("asm/nonmatchings/tengine/", func_287730);
 
-INCLUDE_ASM(s32, "tengine", func_287740);
+INCLUDE_ASM("asm/nonmatchings/tengine/", func_287740);
 
-INCLUDE_ASM(s32, "tengine", func_287758);
+INCLUDE_ASM("asm/nonmatchings/tengine/", func_287758);
 
-INCLUDE_ASM(s32, "tengine", func_287770);
+INCLUDE_ASM("asm/nonmatchings/tengine/", func_287770);

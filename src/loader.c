@@ -26,13 +26,12 @@ void CLoader__Construct(CLoader* thisx, OSId threadId) {
     osStartThread(&thisx->thread);
 }
 
-INCLUDE_ASM(s32, "loader", func_24351C);
+INCLUDE_ASM("asm/nonmatchings/loader/", func_24351C);
 
-INCLUDE_ASM(s32, "loader", func_2435F4);
+INCLUDE_ASM("asm/nonmatchings/loader/", func_2435F4);
 
 // OK except for delay slot optimization and flipped register loads (regalloc is the same, behavior is flipped)
-//#ifdef NON_MATCHING
-/*
+#ifdef NON_MATCHING
 void CLoader__Main(CLoader* thisx) {
     CLoaderEntry* entry;
     OSMesg* dummy;
@@ -63,12 +62,11 @@ void CLoader__Main(CLoader* thisx) {
         }
     }
 }
-*/
-//#else
-INCLUDE_ASM(s32, "loader", CLoader__Main);
-//#endif
+#else
+INCLUDE_ASM("asm/nonmatchings/loader/", CLoader__Main);
+#endif
 
-INCLUDE_ASM(s32, "loader", func_24383C);
+INCLUDE_ASM("asm/nonmatchings/loader/", func_24383C);
 
 void CLoader__DeallocLoaderEntry(CLoader* thisx, CLoaderEntry* entry) {
     OSIntMask mask;

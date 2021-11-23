@@ -13,3 +13,6 @@
 [submodule "libreultra"]
 	path = libreultra
 	url = https://github.com/n64decomp/libreultra.git
+[submodule "tools/lnkconv"]
+	path = tools/lnkconv
+	url = https://github.com/Mr-Wiseguy/lnkconv.git

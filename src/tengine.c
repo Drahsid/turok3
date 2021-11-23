@@ -5,7 +5,8 @@ INCLUDE_ASM("asm/nonmatchings/tengine/", func_283E80);
 
 INCLUDE_ASM("asm/nonmatchings/tengine/", func_284004);
 
-// Only differences are register usage, and delay-slot optimization of the divus in the modulos; additionally D_80124ECD is part of some structure that I need to find the start of
+
+// Only differences are register usage (the AS issue), additionally D_80124ECD is part of some structure that I need to find the start of
 #ifdef NON_MATCHING
 void CEngineApp__Construct(CEngineApp* thisx) {
     uint32_t index;
@@ -219,8 +220,6 @@ void CEngineApp__Idle(CEngineApp* thisx, void* arg) {
     while (1) {}
 }
 
-// OK besides pesky delay slot optimizations. More evidence the game was built with -g/3?
-#ifdef NON_MATCHING
 void CEngineApp__AdvanceFrameData(CEngineApp* thisx) {
     gFrameCount++;
     gFrameCountGameplay++;
@@ -230,9 +229,6 @@ void CEngineApp__AdvanceFrameData(CEngineApp* thisx) {
     thisx->currentFrameData->displayListHead = gEvenOdd ? gDisplayList0 : gDisplayList1;
     thisx->currentFrameData->lineListHead = gEvenOdd ? gLineList0 : gLineList1;
 }
-#else
-INCLUDE_ASM("asm/nonmatchings/tengine/", CEngineApp__AdvanceFrameData);
-#endif
 
 INCLUDE_ASM("asm/nonmatchings/tengine/", func_285DA8);
 
@@ -262,7 +258,7 @@ void mainproc(void* arg) {
     CEngineApp__Main(GetApp());
 }
 
-// Behaviorally matching; differences are delay slot optimization and register order (-g/3?)
+// OK except the AS issue
 #ifdef NON_MATCHING
 void CEngineApp__InitFade(CEngineApp* thisx) {
     thisx->unk_0x28825 = 1;
@@ -279,7 +275,7 @@ INCLUDE_ASM("asm/nonmatchings/tengine/", func_286058);
 
 INCLUDE_ASM("asm/nonmatchings/tengine/", func_28607C);
 
-// Identical behavior, different regalloc (meh)
+// Identical behavior, different regalloc (the AS issue)
 #ifdef NON_MATCHING
 void CEngineApp__Retrace(CEngineApp* thisx) {
     if (gFirstFrame) {

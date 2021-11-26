@@ -1,6 +1,15 @@
-#include "include_asm.h"
+#include "decompressor.h"
+#include "cache.h"
+#include "common.h"
 
-INCLUDE_ASM("asm/nonmatchings/decompressor/", CDecompressor__Construct);
+void CDecompressor__Construct(CDecompressor* thisx, OSId threadId) {
+    osCreateMesgQueue(&thisx->queue, thisx->messages, DECOMPRESSOR_QUEUE_SIZE);
+
+    memset(thisx->stack, threadId, STACKSIZE_DECOMPRESSOR);
+
+    osCreateThread(&thisx->thread, threadId, CDecompressor__Main, thisx, thisx->stack + STACKSIZE_DECOMPRESSOR, gThreadPriorityDecompressorLow);
+    osStartThread(&thisx->thread);
+}
 
 INCLUDE_ASM("asm/nonmatchings/decompressor/", func_2423E0);
 
@@ -8,14 +17,16 @@ INCLUDE_ASM("asm/nonmatchings/decompressor/", func_242474);
 
 INCLUDE_ASM("asm/nonmatchings/decompressor/", func_2424B0);
 
-INCLUDE_ASM("asm/nonmatchings/decompressor/", func_242508);
+void CDecompressor__Main(CDecompressor* thisx) {
+    CCacheEntry* entry;
 
-INCLUDE_ASM("asm/nonmatchings/decompressor/", func_242570);
+    while(1) {
+        osRecvMesg(&thisx->queue, (OSMesg*)&entry, OS_MESG_BLOCK);
 
-INCLUDE_ASM("asm/nonmatchings/decompressor/", func_242644);
+        thisx->lastDecompression = gFrameCount;
+        entry->decompressCallback(entry->notifyId, entry);
 
-INCLUDE_ASM("asm/nonmatchings/decompressor/", func_242718);
-
-INCLUDE_ASM("asm/nonmatchings/decompressor/", func_2427D0);
-
-INCLUDE_ASM("asm/nonmatchings/decompressor/", func_24281C);
+        func_241BD8(); // decrements gCache.lowRamCount
+        osSendMesg(entry->decompressReplyQueue, (OSMesg)entry, OS_MESG_BLOCK);
+    }
+}

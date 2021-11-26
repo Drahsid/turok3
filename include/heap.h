@@ -20,7 +20,12 @@ typedef struct {
     /* 0x10 */ struct CHeapBlock* usedHead; // "pUsedHead"
 } CHeap; /* sizeof = 0x14 */
 
+extern CHeap gHeap;
+
+#define Malloc(SIZE) (CHeap__Alloc(&gHeap, SIZE))
+
 extern void CHeap__Construct(CHeap* thisx, void* start, uint32_t length);
+extern void* CHeap__Alloc(CHeap* thisx, SIZE_TYPE size);
 
 #endif
 

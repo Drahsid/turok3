@@ -2,6 +2,7 @@
 #include "loader.h"
 #include "defs.h"
 #include "list.h"
+#include "scsi_c.h"
 
 void CLoader__Construct(CLoader* thisx, OSId threadId) {
     int32_t index;
@@ -30,27 +31,26 @@ INCLUDE_ASM("asm/nonmatchings/loader/", func_24351C);
 
 INCLUDE_ASM("asm/nonmatchings/loader/", func_2435F4);
 
-// OK except for delay slot optimization and flipped register loads (regalloc is the same, behavior is flipped)
-#ifdef NON_MATCHING
 void CLoader__Main(CLoader* thisx) {
     CLoaderEntry* entry;
+    int32_t dma_ret; // used for an assert in debug builds
     OSMesg* dummy;
     OSTimer timer;
-    int32_t dmaRet; // used for an assert in debug builds
 
     while (1) {
         osRecvMesg(&thisx->queue, &entry, OS_MESG_BLOCK);
+
         if ((uint32_t)entry == 0xBEEFDEAD) {
             osSetTimer(&timer, 0, OS_USEC_TO_CYCLES(80000), &thisx->queue, (OSMesg)0xDEADBEEF);
         }
         else if ((uint32_t)entry == 0xDEADBEEF) {
-            if (CTexModSet__IsActive() != 0) {
-                SCSI_PollHost(&thisx->queue);
+            if (CTexModSet__IsActive()) {
+                SCSI_PollHost();
             }
         }
         else {
             osWritebackDCache(entry->dest, entry->length);
-            dmaRet = osPiRawStartDma(OS_READ, (uint32_t)entry->address, entry->dest, entry->length);
+            dma_ret = osPiRawStartDma(OS_READ, (uint32_t)entry->address, entry->dest, entry->length);
             osRecvMesg(&thisx->piReplyQueue, &dummy, OS_MESG_BLOCK);
             osInvalDCache(entry->dest, entry->length);
 
@@ -62,9 +62,6 @@ void CLoader__Main(CLoader* thisx) {
         }
     }
 }
-#else
-INCLUDE_ASM("asm/nonmatchings/loader/", CLoader__Main);
-#endif
 
 INCLUDE_ASM("asm/nonmatchings/loader/", func_24383C);
 

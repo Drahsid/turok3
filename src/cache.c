@@ -1,4 +1,7 @@
-#include "include_asm.h"
+#include "cache.h"
+#include "defs.h"
+#include "heap.h"
+#include "hash.h"
 
 INCLUDE_ASM("asm/nonmatchings/cache/", func_23D490);
 
@@ -46,7 +49,67 @@ INCLUDE_ASM("asm/nonmatchings/cache/", func_23EC68);
 
 INCLUDE_ASM("asm/nonmatchings/cache/", func_23EC9C);
 
-INCLUDE_ASM("asm/nonmatchings/cache/", CCache__Construct);
+void CCache__Construct(OSId threadId) {
+    int32_t index;
+    CMemEntry* mem_entry;
+    CCacheEntry* cache_entry;
+
+    CMutex__Construct(&gCache.mutex);
+    CMutex__Begin(&gCache.mutex);
+
+    gCacheEntryCount = CACHE_ENTRIES;
+
+    if (GetMemSize() > 0x400000) {
+        gCacheEntryCount *= 2;
+    }
+
+    gCache.memEntries = Malloc(gCacheEntryCount * sizeof(CMemEntry));
+    gCache.memEntriesFree = Malloc(gCacheEntryCount * sizeof(CMemEntry*));
+    gCache.cacheEntries = Malloc(gCacheEntryCount * sizeof(CCacheEntry));
+
+    CBlocker__Construct(&gCache.blocker);
+    gCache.dlistBlocking[0] = gCache.dlistBlocking[1] = 0;
+
+    CList__Construct(&gCache.memAgeList, OFFSETOF(CMemEntry, last), OFFSETOF(CMemEntry, next));
+
+    gCache.freeEntryCount = 0;
+    for (index = 0; index < gCacheEntryCount; index++) {
+        mem_entry = &gCache.memEntries[index];
+        mem_entry->flags = MEMENTRY_FLAG_UNALLOCATED;
+
+        gCache.memEntriesFree[index] = mem_entry;
+        gCache.freeEntryCount++;
+    }
+
+    gCache.dlistValid[0] = gCache.dlistValid[1] = 1;
+    gCache.currentDlist = -1;
+    gCache.dlistCount[0] = 0;
+    gCache.dlistCount[1] = 0;
+    gCache.currentCompressPos = NULLPTR;
+    gCache.synchronous = 0;
+    gCache.ageCount = 0;
+    gCache.unk_0xC0C = 0;
+    gCache.lowRamCount = 0;
+
+    CList__Construct(&gCache.cacheFreeList, OFFSETOF(CCacheEntry, last), OFFSETOF(CCacheEntry, next));
+    CList__Construct(&gCache.cacheUsedList, OFFSETOF(CCacheEntry, last), OFFSETOF(CCacheEntry, next));
+    CList__Construct(&gCache.cachePendingList, OFFSETOF(CCacheEntry, last), OFFSETOF(CCacheEntry, next));
+
+    for (index = 0; index < gCacheEntryCount; index++) {
+        cache_entry = &gCache.cacheEntries[index];
+        cache_entry->flags = CACHEENTRY_FLAG_UNALLOCATED;
+        CList__AddTail(&gCache.cacheFreeList, cache_entry);
+    }
+
+    CHashTable__Construct(gCacheEntryCount);
+    osCreateMesgQueue(&gCache.queue, gCache.messages, CACHE_QUEUE_SIZE);
+
+    CMutex__End(&gCache.mutex);
+
+    memset(gCache.stack, threadId, STACKSIZE_CACHE);
+    osCreateThread(&gCache.thread, threadId, CCache__Main, NULLPTR, gCache.stack + STACKSIZE_CACHE, gThreadPriorityCache);
+    osStartThread(&gCache.thread);
+}
 
 INCLUDE_ASM("asm/nonmatchings/cache/", func_23F024);
 
@@ -64,7 +127,7 @@ INCLUDE_ASM("asm/nonmatchings/cache/", func_23FD18);
 
 INCLUDE_ASM("asm/nonmatchings/cache/", func_240218);
 
-INCLUDE_ASM("asm/nonmatchings/cache/", func_240374);
+INCLUDE_ASM("asm/nonmatchings/cache/", CCache__Main);
 
 INCLUDE_ASM("asm/nonmatchings/cache/", func_240608);
 

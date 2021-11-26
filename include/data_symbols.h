@@ -10,6 +10,8 @@ extern OSPri gThreadPriorityIdleInit; // "PRIORITY_IDLEINIT"
 extern OSPri gThreadPriorityMain; // "PRIORITY_MAIN"
 extern OSPri gThreadPriorityLoader; // "PRIORITY_LOADER"
 extern OSPri gThreadPriorityScheduler; // "PRIORITY_SCHEDULER"
+extern OSPri gThreadPriorityCache; // "PRIORITY_CACHE"
+extern OSPri gThreadPriorityDecompressorLow; // "PRIORITY_DECOMPRESSOR_LOW"
 extern char gEngineTimestamp[256];
 extern char gEngineTimestampFormat[];
 extern char gEngineTimestampDate[];

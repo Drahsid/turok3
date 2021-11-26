@@ -1,4 +1,9 @@
-#include "include_asm.h"
+#include "scsi_c.h"
+#include "common.h"
+
+#ifdef NON_MATCHING
+SCSI_MessageFunc gScsiMessageFunc = NULLPTR;
+#endif
 
 INCLUDE_ASM("asm/nonmatchings/scsi_c/", func_2166F0);
 
@@ -49,7 +54,9 @@ INCLUDE_ASM("asm/nonmatchings/scsi_c/", func_219798);
 void func_2199E4(void) {
 }
 
-INCLUDE_ASM("asm/nonmatchings/scsi_c/", SCSI_SetMessageFunc);
+void SCSI_SetMessageFunc(SCSI_MessageFunc func) {
+    gScsiMessageFunc = func;
+}
 
 INCLUDE_ASM("asm/nonmatchings/scsi_c/", func_2199FC);
 

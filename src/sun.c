@@ -10,23 +10,12 @@ void CSunFrameData__Construct(CSunFrameData* thisx) {
 void func_283D7C(void) {
 }
 
-// Behaviorally equal; CVector3__Normalize is inlined, which seems to effect codegen (stack and regalloc)
+// Behaviorally equal; different pseudo-ops?
 #ifdef NON_MATCHING
 void CSun__SetSunDir(CSun* thisx, CVector3* dir) {
-    float length;
-    float norm;
-
-    thisx->m_vDir = *dir;
-
-    length = CVector3__Magnitude(&thisx->m_vDir);
-    if (length != 0) {
-        norm = 1.0f / length;
-        (&thisx->m_vDir)->x *= norm;
-        (&thisx->m_vDir)->y *= norm;
-        (&thisx->m_vDir)->z *= norm;
-    }
+    thisx->dir = *dir;
+    CVector3__Normalize(&thisx->dir);
 }
-
 #else
 INCLUDE_ASM("asm/nonmatchings/sun/", CSun__SetSunDir);
 #endif

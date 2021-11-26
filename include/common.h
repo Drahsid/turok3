@@ -27,10 +27,12 @@ extern OSThread gThreadIdle; // "idleThread"
 extern OSThread gThreadMain; // "mainThread"
 
 // stacks
-#define	STACKSIZE_IDLE  (0x0080)
-#define	STACKSIZE_BASE  (0x1000)
-#define	STACKSIZE_MAIN  (0x8000)
-#define	STACKSIZE_AUDIO (0x4000)
+#define STACKSIZE_IDLE          (0x0080)
+#define STACKSIZE_BASE          (0x1000)
+#define STACKSIZE_MAIN          (0x8000)
+#define STACKSIZE_AUDIO         (0x4000)
+#define STACKSIZE_CACHE         (0x0800)
+#define STACKSIZE_DECOMPRESSOR  (0x1000)
 
 extern uint8_t gSchedulerStack[]; // "schedule_stack"
 extern uint8_t gThreadStackIdle[]; // "idle_thread_stack"

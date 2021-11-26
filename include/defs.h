@@ -5,6 +5,7 @@
 
 #define OFFSETOF(STRUCT, MEMBER) ((int32_t)&(((STRUCT*)0)->MEMBER))
 
+extern SIZE_TYPE GetMemSize(void);
 extern int32_t strcmp(const char* str0, const char* str1);
 extern char* strcpy(char* dest, const char* src);
 

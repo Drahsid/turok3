@@ -4,7 +4,6 @@
 #include "common.h"
 #include "tengine.h"
 
-typedef uint32_t (*SCSI_MessageFunc)(uint32_t);
 extern uint32_t func_20A9E0(int32_t arg0);
 extern void* memset(void* ptr, int32_t value, uint32_t bytes);
 extern void boot();
@@ -21,7 +20,6 @@ extern void CScene__Construct(CScene* thisx, void* romData);
 extern void InitControllers(void);
 extern void InitializeSystemResources(void);
 extern void PAK_InitSystem(void);
-extern void SCSI_SetMessageFunc(SCSI_MessageFunc func);
 extern void func_2523A4(void);
 extern void func_252414(void*);
 extern void func_25245C(int32_t);
@@ -34,6 +32,7 @@ extern void VM_Initialize(char*, char*);
 extern void CCache__Construct(OSId threadId);
 extern void func_232A68(void);
 extern void func_232B00(void);
+extern void func_241BD8(void);
 
 #endif
 

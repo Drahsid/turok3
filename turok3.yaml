@@ -78,10 +78,11 @@ segments:
       - [0x3D010, asm]
       - [0x3E090, c, cache]
       - [0x42F60, c, decompressor]
+      - [0x43170, c, hash]
       - [0x434C0, c, heap]
       - [0x43A40, c, list]
       - [0x44020, c, loader]
-      - [0x44510, asm]
+      - [0x44510, c, mutex]
       - [0x445F0, c, sysrc]
       - [0x446B0, asm]
       - [0x451B0, asm]
@@ -289,7 +290,12 @@ segments:
       - [0xF1E80, bin]
       - [0xF2D80, rodata, main]
       - [0x100A00, data, main]
-      - [0x100A20, bin] # data, rodata, and many megabytes of other data
+      - [0x100A20, data] # data
+      - [0x103A60, .data, hash]
+      - [0x103A70, data]
+      # I can't do basic addition it seems, these must be wrong
+#      - [0x128C80, .bss, hash]
+#      - [0x128CA0, bin] # more bss?
   - name: virtual # RNC compressed code, data, and rodata that gets swapped in and out of memory as needed; _virtual_org
     type: code # We have limited options for how to manage this, but inevitably we have to decompress the split files, and recompress the reconstructed code
     start: 0x115760

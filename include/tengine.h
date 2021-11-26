@@ -8,6 +8,9 @@
 #include "sun.h"
 #include <PR/sched.h>
 
+#define GetApp() (&gEngineApp)
+#define MAX_DISPLAY_LISTS (2)
+
 typedef union {
     struct {
         int16_t type;
@@ -85,9 +88,6 @@ typedef struct {
     /* 0x04 */ CEngineFunction unk_0x4;
     /* 0x08 */ CEngineFunction unk_0x8;
 } CEngineModeInfo; /* sizeof = 0x0C */
-
-#define GetApp() (&gEngineApp)
-#define MAX_DISPLAY_LISTS (2)
 
 
 extern CEngineApp gEngineApp;               // "engine_app"

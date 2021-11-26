@@ -4,9 +4,13 @@
 
 uint32_t gHashSize = 0;
 uint32_t gHashTableSize = 0;
+
+// TODO: locate this split
+#ifdef NON_MATCHING
 uint32_t gHashMask;
 uint32_t gHashTableMask;
 HashEntry* gHashTable;
+#endif
 
 static inline uint32_t RoundToPowerOfTwo(uint32_t x) {
     int32_t num_bits = 0;
@@ -28,8 +32,7 @@ static inline uint32_t RoundToPowerOfTwo(uint32_t x) {
 }
 
 
-// sltu pseudo-op expanion is different; otherwise OK
-#ifdef NON_MATCHING
+#if defined(NON_MATCHING) || defined(ORIGINAL_AS_TESTS) || defined(IGNORE_PSEUDOOPS)
 void CHashTable__Construct(uint32_t num_entries) {
     int32_t index;
 

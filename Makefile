@@ -42,6 +42,10 @@ ifeq ($(ORIGINAL_AS_TESTS),1)
 D_FLAGS += -DORIGINAL_AS_TESTS
 endif
 
+ifeq ($(IGNORE_PSEUDOOPS),1)
+D_FLAGS += -DIGNORE_PSEUDOOPS
+endif
+
 CC_FLAGS := -quiet -G 0 -mips3 -mcpu=R4300 $(OPT_FLAGS) -mrnames # T2's original compiler had these default options: -mgas -meb -mcpu=R4300
 CPP_FLAGS := -P -undef -Wall -lang-c $(D_FLAGS) $(INCLUDE_CC_FLAGS) -nostdinc
 LD_FLAGS := -T $(LD_SCRIPT) -Map $(TARGET).map -T undefined_syms_auto.txt -T undefined_funcs_auto.txt -T undefined_funcs.txt -T undefined_syms.txt --no-check-sections

@@ -10,8 +10,7 @@ void CSunFrameData__Construct(CSunFrameData* thisx) {
 void func_283D7C(void) {
 }
 
-// Behaviorally equal; different pseudo-ops?
-#ifdef NON_MATCHING
+#if defined(NON_MATCHING) || defined(ORIGINAL_AS_TESTS) || defined(IGNORE_PSEUDOOPS)
 void CSun__SetSunDir(CSun* thisx, CVector3* dir) {
     thisx->dir = *dir;
     CVector3__Normalize(&thisx->dir);

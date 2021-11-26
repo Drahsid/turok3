@@ -258,8 +258,7 @@ void mainproc(void* arg) {
     CEngineApp__Main(GetApp());
 }
 
-// OK except the AS issue
-#ifdef NON_MATCHING
+#if defined(NON_MATCHING) || defined(ORIGINAL_AS_TESTS) || defined(IGNORE_PSEUDOOPS)
 void CEngineApp__InitFade(CEngineApp* thisx) {
     thisx->unk_0x28825 = 1;
     thisx->fadeAlpha = 0;
@@ -275,8 +274,7 @@ INCLUDE_ASM("asm/nonmatchings/tengine/", func_286058);
 
 INCLUDE_ASM("asm/nonmatchings/tengine/", func_28607C);
 
-// Identical behavior, different regalloc (the AS issue)
-#ifdef NON_MATCHING
+#if defined(NON_MATCHING) || defined(ORIGINAL_AS_TESTS) || defined(IGNORE_PSEUDOOPS)
 void CEngineApp__Retrace(CEngineApp* thisx) {
     if (gFirstFrame) {
         gFirstFrame = 0;

@@ -38,12 +38,18 @@ INCLUDE_CC_FLAGS := -I. -Iinclude -Ilibreultra/include/2.0I
 AS_FLAGS := -EB -mtune=vr4300 -march=vr4300 -mabi=32 -mips3 -O1 -I include
 ASM_FLAGS := -I include -mips3
 D_FLAGS := -D_LANGUAGE_C -DF3DEX_GBI_2 -D__GNUC__=2
+
+# Additional defines
 ifeq ($(ORIGINAL_AS_TESTS),1)
 D_FLAGS += -DORIGINAL_AS_TESTS
 endif
 
 ifeq ($(IGNORE_PSEUDOOPS),1)
 D_FLAGS += -DIGNORE_PSEUDOOPS
+endif
+
+ifeq ($(ALLOW_SHIFTY_PSEUDOOPS),1)
+D_FLAGS += -ALLOW_SHIFTY_PSEUDOOPS
 endif
 
 CC_FLAGS := -quiet -G 0 -mips3 -mcpu=R4300 $(OPT_FLAGS) -mrnames # T2's original compiler had these default options: -mgas -meb -mcpu=R4300

@@ -9,6 +9,7 @@ options:
   platform: n64
   generated_c_preamble: "#include \"include_asm.h\""
   generated_s_preamble: ".set fp=64"
+  use_legacy_include_asm: False
 segments:
   - name: header
     type: header

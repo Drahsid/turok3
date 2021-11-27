@@ -1,4 +1,7 @@
 # Turok 3
+[![Match Status](https://img.shields.io/badge/matched-0.35-brightgreen.svg)]()
+[![Decomp Status](https://img.shields.io/badge/decompiled-0.56-yellow.svg)]()
+
 A in-progress decompilation of Turok 3 for the N64. This project currently supports the US release.
 
 ## Building (Linux)

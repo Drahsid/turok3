@@ -278,7 +278,7 @@ if (not args.silent):
     print("\033[0;32m0x" + (hexformat % srcSize).upper() + " / 0x" + (hexformat % total).upper() + " matching   (" + str(srcPct) + "%)\033[0;0m")
     print("\033[0;33m0x" + (hexformat % nonMatchingSrcSize).upper() + " / 0x" + (hexformat % total).upper() + " decompiled (" + str(nonMatchingSrcPct) + "%)\033[0;0m")
     print("------------------------------------")
-    print("You are on " + str(chapter + 1) + "-" + str(levelIndex + 1) + ": " + levelName)
+    print("You are on " + levelName)
     print("You have collected " + str(psg) + " / " + str(5) + " PSG parts!")
 
 if (args.update):

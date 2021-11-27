@@ -36,6 +36,16 @@ Next, run `make setup` to extract the assets of the rom.
 ### Build the rom
 Just run `make` to build the rom.
 
+#### Make Flags
+to enable any of these, append `FLAG=1` to the end of the `make` command.
+
+|Flag|Description|
+|:-:|:-:|
+|ALLOW_SHIFTY_PSEUDOOPS|When this flag is enabled, pseudo-op fixups will not be applied|
+|IGNORE_PSEUDOOPS|When this flag is enabled, functions that are `NON_MATCHING` due to modern-as pseudo-ops will be treated as matching|
+|NON_MATCHING|When this flah is enabled, `NON_MATCHING` functions will be built instead of their assembly|
+|ORIGINAL_AS_TESTS|When this flag is enabled, `IGNORE_PSEUDOOPS` is implied and the build system will try to use the original assembler|
+
 ## Contributing
 Contributions are welcome. If you would like to reserve a function, open a PR with the function or file name(s).
 

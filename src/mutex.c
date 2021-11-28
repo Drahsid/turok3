@@ -1,7 +1,7 @@
 #include "mutex.h"
 #include "common.h"
 
-INCLUDE_ASM("asm/nonmatchings/mutex/", func_243910);
+INCLUDE_ASM("asm/nonmatchings/mutex", func_243910);
 
 void CMutex__Construct(CMutex* thisx) {
     thisx->count = 0;

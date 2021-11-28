@@ -26,5 +26,7 @@ extern void CSunFrameData__Construct(CSunFrameData* thisx);
 extern void CSun__GetSunData(CSun* thisx, int32_t* visible, float* posx, float* posy, float* opacity);
 extern void CSun__SetSunDir(CSun* thisx, CVector3* dir);
 
+extern void CSun__Construct(CSun* thisx);
+
 #endif
 

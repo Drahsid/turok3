@@ -13,14 +13,14 @@ typedef struct {
     /* 0x010 */ uint32_t unk_0x10;
     /* 0x014 */ uint32_t unk_0x14;
     /* 0x018 */ uint32_t unk_0x18;
-    /* 0x01C */ uint32_t unk_0x1C;
+    /* 0x01C */ float currentTime; // "CurrentTime"
     /* 0x020 */ uint32_t unk_0x20;
     /* 0x024 */ uint32_t unk_0x24;
     /* 0x028 */ uint32_t unk_0x28;
     /* 0x02C */ uint32_t unk_0x2C;
-    /* 0x030 */ uint32_t unk_0x30;
-    /* 0x034 */ uint32_t unk_0x34;
-    /* 0x038 */ uint32_t unk_0x38;
+    /* 0x030 */ float pathBegin; // "PathBegin"
+    /* 0x034 */ float pathEnd; // "PathEnd"
+    /* 0x038 */ int32_t playing; // "Playing"
     /* 0x03C */ uint32_t unk_0x3C;
     /* 0x040 */ uint32_t unk_0x40;
     /* 0x044 */ uint32_t unk_0x44;

@@ -50,13 +50,13 @@ void CHashTable__Construct(uint32_t num_entries) {
     }
 }
 #else
-INCLUDE_ASM("asm/nonmatchings/hash/", CHashTable__Construct);
+INCLUDE_ASM("asm/nonmatchings/hash", CHashTable__Construct);
 #endif
 
-INCLUDE_ASM("asm/nonmatchings/hash/", func_242644);
+INCLUDE_ASM("asm/nonmatchings/hash", func_242644);
 
-INCLUDE_ASM("asm/nonmatchings/hash/", func_242718);
+INCLUDE_ASM("asm/nonmatchings/hash", func_242718);
 
-INCLUDE_ASM("asm/nonmatchings/hash/", func_2427D0);
+INCLUDE_ASM("asm/nonmatchings/hash", func_2427D0);
 
-INCLUDE_ASM("asm/nonmatchings/hash/", func_24281C);
+INCLUDE_ASM("asm/nonmatchings/hash", func_24281C);

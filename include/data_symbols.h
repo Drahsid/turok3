@@ -36,8 +36,10 @@ extern Gfx* gDList; // "pDList"
 extern UNK_TYPE D_80166190;
 extern UNK_TYPE D_801659B0;
 extern float D_800FB0BC;
-extern struct_D_80124ECD D_80124ECD;
+extern uint8_t D_80124ECD;
+extern uint32_t D_80125224;
 extern float D_800F8D60;
+extern uint32_t D_80136EE4;
 
 #endif
 

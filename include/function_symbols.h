@@ -33,6 +33,7 @@ extern void CCache__Construct(OSId threadId);
 extern void func_232A68(void);
 extern void func_232B00(void);
 extern void func_241BD8(void);
+extern int32_t Cinema_PathPlaying(void);
 
 #endif
 

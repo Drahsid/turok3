@@ -39,9 +39,9 @@ void CList__AddTail(CList* thisx, void* entry) {
 }
 
 
-INCLUDE_ASM("asm/nonmatchings/list/", func_242F10);
+INCLUDE_ASM("asm/nonmatchings/list", func_242F10);
 
-INCLUDE_ASM("asm/nonmatchings/list/", func_242FC4);
+INCLUDE_ASM("asm/nonmatchings/list", func_242FC4);
 
 void CList__Remove(CList* thisx, void* entry) {
     if (CList__GetLast(thisx, entry)) {
@@ -63,16 +63,16 @@ void CList__Remove(CList* thisx, void* entry) {
     thisx->size--;
 }
 
-INCLUDE_ASM("asm/nonmatchings/list/", func_243110);
+INCLUDE_ASM("asm/nonmatchings/list", func_243110);
 
-INCLUDE_ASM("asm/nonmatchings/list/", func_243134);
+INCLUDE_ASM("asm/nonmatchings/list", func_243134);
 
-INCLUDE_ASM("asm/nonmatchings/list/", func_243158);
+INCLUDE_ASM("asm/nonmatchings/list", func_243158);
 
-INCLUDE_ASM("asm/nonmatchings/list/", func_243244);
+INCLUDE_ASM("asm/nonmatchings/list", func_243244);
 
-INCLUDE_ASM("asm/nonmatchings/list/", func_243330);
+INCLUDE_ASM("asm/nonmatchings/list", func_243330);
 
-INCLUDE_ASM("asm/nonmatchings/list/", func_2433B4);
+INCLUDE_ASM("asm/nonmatchings/list", func_2433B4);
 
-INCLUDE_ASM("asm/nonmatchings/list/", func_2433DC);
+INCLUDE_ASM("asm/nonmatchings/list", func_2433DC);

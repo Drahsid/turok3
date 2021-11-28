@@ -2,9 +2,9 @@ BASENAME  = turok3
 
 ROOT_DIR  = $(PWD)
 BUILD_DIR = build
-ASM_DIRS  = asm src/asm asm/data
+ASM_DIRS  = asm src/asm asm/data asm/data/virtual
 BIN_DIRS  = assets
-SRC_DIR   = src
+SRC_DIR   = src src/virtual
 SRC_DIRS  = $(SRC_DIR)
 TOOLS_DIR := tools
 
@@ -41,7 +41,7 @@ D_FLAGS := -D_LANGUAGE_C -DF3DEX_GBI_2 -D__GNUC__=2
 
 # Additional defines
 ifeq ($(ORIGINAL_AS_TESTS),1)
-D_FLAGS += -DORIGINAL_AS_TESTS -DIGNORE_PSEUDOOPS
+D_FLAGS += -DORIGINAL_AS_TESTS -DIGNORE_PSEUDOOPS -DALLOW_SHIFTY_PSEUDOOPS
 endif
 
 ifeq ($(IGNORE_PSEUDOOPS),1)
@@ -56,7 +56,7 @@ ifeq ($(NON_MATCHING),1)
 D_FLAGS += -DNON_MATCHING
 endif
 
-CC_FLAGS := -quiet -G 0 -mips3 -mcpu=R4300 $(OPT_FLAGS) -mrnames # T2's original compiler had these default options: -mgas -meb -mcpu=R4300
+CC_FLAGS := -quiet -G 0 -mips3 -mcpu=R4300 $(OPT_FLAGS) -mfp64 -mrnames # T2's original compiler had these default options: -mgas -meb -mcpu=R4300
 CPP_FLAGS := -P -undef -Wall -lang-c $(D_FLAGS) $(INCLUDE_CC_FLAGS) -nostdinc
 LD_FLAGS := -T $(LD_SCRIPT) -Map $(TARGET).map -T undefined_syms_auto.txt -T undefined_funcs_auto.txt -T undefined_funcs.txt -T undefined_syms.txt --no-check-sections
 OBJCOPY_FLAGS = -O binary

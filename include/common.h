@@ -34,6 +34,10 @@ extern OSThread gThreadMain; // "mainThread"
 #define STACKSIZE_CACHE         (0x0800)
 #define STACKSIZE_DECOMPRESSOR  (0x1000)
 
+#define ABS(X)      (((X) < 0) ? (-(X)) : (X))
+#define MAX(A, B)   ((A) > (B) ? (A) : (B))
+#define MIN(A, B)   ((A) < (B) ? (A) : (B))
+
 extern uint8_t gSchedulerStack[]; // "schedule_stack"
 extern uint8_t gThreadStackIdle[]; // "idle_thread_stack"
 extern uint8_t gThreadStackMain[]; // "main_thread_stack"

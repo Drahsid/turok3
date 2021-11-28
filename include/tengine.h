@@ -6,10 +6,13 @@
 #include "camera.h"
 #include "scene.h"
 #include "sun.h"
+#include "options.h"
 #include <PR/sched.h>
 
 #define GetApp() (&gEngineApp)
 #define MAX_DISPLAY_LISTS (2)
+#define CALC_FRAMERATE(MIN_TICKS) MAX(MIN_TICKS, ((gNumTicks0 + gNumTicks1 + gNumTicks2 + gNumTicks3 + 2) - MAX(gNumTicks0, MAX(gNumTicks1, MAX(gNumTicks2, gNumTicks3)))) / 3)
+#define FRAME_FPS (15)
 
 typedef union {
     struct {
@@ -25,7 +28,7 @@ typedef struct CFrameData {
     /* 0x000 */ CSunFrameData sunFrameData; // "m_SunFrame"
     /* 0x020 */ OSScTask gfxTask;           // "m_Task"
     /* 0x088 */ OSScTask lineTask;          // "m_LineTask"
-    /* 0x0F0 */ GFXMsg message;             // "m_Message"
+    /* 0x0F0 */ GFXMsg message;             // "m_Msg"
     /* 0x110 */ void* frameBuffer;          // "m_pFrameBuffer"
     /* 0x114 */ Gfx* displayListHead;       // "m_pDisplayList"
     /* 0x118 */ Gfx* lineListHead;          // "m_pLineList"
@@ -44,22 +47,18 @@ typedef struct {
     /* 0x003B0 */ CScene scene;                 // "m_Scene"
     /* 0x1D7E0 */ uint8_t unk_0x1D7E0[0x96D0];
     /* 0x26EB0 */ CPlayerPool playerPool;       // "m_PlayerPool"
-    /* 0x26EF4 */ uint32_t unk_0x26EF8;
-    /* 0x26EF8 */ uint32_t unk_0x26EFC;
-    /* 0x26EFC */ CCameraPool cameraPool;       // "m_CameraPool"
-    /* 0x280E8 */ uint8_t unk_0x280E8[0x704];
-    /* 0x287EC */ uint8_t unk_0x287EC;
-    /* 0x287ED */ uint8_t unk_0x287ED[3];
-    /* 0x287F0 */ uint32_t unk_0x287F0;
-    /* 0x287F4 */ uint32_t unk_0x287F4;
-    /* 0x287F8 */ uint32_t unk_0x287F8;
-    /* 0x287FC */ uint32_t unk_0x287FC;
-    /* 0x28800 */ uint32_t unk_0x28800;
+    /* 0x26EF4 */ uint32_t unk_0x26EF4;
+    /* 0x26EF8 */ uint32_t unk_0x26EF8;
+    /* 0x26EFC */ uint32_t unk_0x26EFC;
+    /* 0x26F00 */ CCameraPool cameraPool;       // "m_CameraPool"
+    /* 0x280E8 */ uint8_t unk_0x280E8[0x4];
+    /* 0x280F0 */ COptions options;             // "m_Options"
+    /* 0x287E0 */ CSun sun;                     // "m_Sun"
     /* 0x28804 */ uint32_t unk_0x28804;
-    /* 0x28808 */ uint32_t unk_0x28808;
-    /* 0x2880C */ uint32_t unk_0x2880C;
-    /* 0x28810 */ uint32_t unk_0x28810;
-    /* 0x28814 */ uint32_t unk_0x28814;
+    /* 0x28808 */ float unk_0x28808;
+    /* 0x2880C */ float unk_0x2880C;
+    /* 0x28810 */ float unk_0x28810;
+    /* 0x28814 */ float modeTime;               // "m_ModeTime"
     /* 0x28818 */ uint32_t lastMode;            // "m_LastMode"
     /* 0x2881C */ uint32_t currentMode;         // "m_Mode"
     /* 0x28820 */ uint32_t unk_0x28820;
@@ -94,6 +93,7 @@ extern CEngineApp gEngineApp;               // "engine_app"
 extern GFXMsg* gGfxMsg;                     // "pMsg"
 extern CFrameData* gFrameData;              // "pFrameData"
 extern int32_t gDisplayListCount;           // "nDisplayLists"
+extern int32_t gNextTicks;                  // "nNextFields"
 extern OSSched gScheduler;                  // "sc"
 extern OSScClient gGfxClient;               // "gfxClient"
 extern int32_t gFirstFrame;                 // "firstFrame"
@@ -110,16 +110,20 @@ extern int32_t gNumTicksWaiting;            // "n_waiting"
 extern int32_t gCurrentTickFinished;        // "c_finished"
 extern int32_t gCurrentFB;                  // "p_current_fb"
 extern int32_t gPendingFB;                  // "p_pending_fb"
+extern float gFrameIncrement;               // "frame_increment"
 extern uint32_t gFrameCount;                // "frame_number"
 extern uint32_t gEvenOdd;                   // "even_odd"
 extern uint32_t gFrameCountGameplay;        // "game_frame_number"
 extern uint32_t gRetraceCount;              // "retrace_count"
+extern OSTime gLastEngineUpdate;            // "LastEngineUpdate"
 extern float gRefreshRate;                  // "refresh_rate"
+extern Vtx gShadowVertexes[];               // "shadow_vtxs"
 extern CEngineModeInfo gEngineModeTable[];  // "EngineModeTable"
 
 
 extern void CEngineApp__Construct(CEngineApp* thisx);
 extern void CEngineApp__Main(CEngineApp* thisx);
+extern void CEngineApp__Draw(CEngineApp* thisx);
 extern void CEngineApp__Update(CEngineApp* thisx);
 extern void boot(void);
 extern void CEngineApp__Boot(CEngineApp* thisx);
@@ -129,6 +133,8 @@ extern void idle(void* arg);
 extern void mainproc(void* arg);
 extern void CEngineApp__InitFade(CEngineApp* thisx);
 extern void CEngineApp__Retrace(CEngineApp* thisx);
+
+extern void CEngineApp__SetupShadowVtxs(void);
 
 #endif
 

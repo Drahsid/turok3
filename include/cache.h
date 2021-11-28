@@ -82,6 +82,7 @@ extern CCache gCache;
 
 extern void CCache__Construct(OSId threadId);
 extern void CCache__Main(void*);
+extern void CCache__Advance(void);
 
 #endif
 

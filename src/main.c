@@ -10,7 +10,7 @@ uint32_t func_20A9E0(int32_t arg0) {
     }
 }
 
-INCLUDE_ASM("asm/nonmatchings/main/", func_20AA08);
+INCLUDE_ASM("asm/nonmatchings/main", func_20AA08);
 
 // loading of "systembootdone" string, (particularly bzero in place of the memset for setting the null character... but why JAL for one byte?)
 // additionally, missing behavior in bss clearing function
@@ -70,12 +70,12 @@ int32_t main(void) {
     return 0;
 }
 #else
-INCLUDE_ASM("asm/nonmatchings/main/", main);
+INCLUDE_ASM("asm/nonmatchings/main", main);
 #endif
 
 void __main(void) {
 }
 
-INCLUDE_ASM("asm/nonmatchings/main/", func_20AC08);
+INCLUDE_ASM("asm/nonmatchings/main", func_20AC08);
 
-INCLUDE_ASM("asm/nonmatchings/main/", func_20AC50);
+INCLUDE_ASM("asm/nonmatchings/main", func_20AC50);

@@ -16,7 +16,7 @@ void CSun__SetSunDir(CSun* thisx, CVector3* dir) {
     CVector3__Normalize(&thisx->dir);
 }
 #else
-INCLUDE_ASM("asm/nonmatchings/sun/", CSun__SetSunDir);
+INCLUDE_ASM("asm/nonmatchings/sun", CSun__SetSunDir);
 #endif
 
 void CSun__GetSunData(CSun* thisx, int32_t* visible, float* pos_x, float* pos_y, float* opacity) {

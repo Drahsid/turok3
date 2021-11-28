@@ -11,11 +11,11 @@ void CDecompressor__Construct(CDecompressor* thisx, OSId threadId) {
     osStartThread(&thisx->thread);
 }
 
-INCLUDE_ASM("asm/nonmatchings/decompressor/", func_2423E0);
+INCLUDE_ASM("asm/nonmatchings/decompressor", func_2423E0);
 
-INCLUDE_ASM("asm/nonmatchings/decompressor/", func_242474);
+INCLUDE_ASM("asm/nonmatchings/decompressor", func_242474);
 
-INCLUDE_ASM("asm/nonmatchings/decompressor/", func_2424B0);
+INCLUDE_ASM("asm/nonmatchings/decompressor", func_2424B0);
 
 void CDecompressor__Main(CDecompressor* thisx) {
     CCacheEntry* entry;

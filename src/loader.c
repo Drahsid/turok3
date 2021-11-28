@@ -27,9 +27,9 @@ void CLoader__Construct(CLoader* thisx, OSId threadId) {
     osStartThread(&thisx->thread);
 }
 
-INCLUDE_ASM("asm/nonmatchings/loader/", func_24351C);
+INCLUDE_ASM("asm/nonmatchings/loader", func_24351C);
 
-INCLUDE_ASM("asm/nonmatchings/loader/", func_2435F4);
+INCLUDE_ASM("asm/nonmatchings/loader", func_2435F4);
 
 void CLoader__Main(CLoader* thisx) {
     CLoaderEntry* entry;
@@ -63,7 +63,7 @@ void CLoader__Main(CLoader* thisx) {
     }
 }
 
-INCLUDE_ASM("asm/nonmatchings/loader/", func_24383C);
+INCLUDE_ASM("asm/nonmatchings/loader", func_24383C);
 
 void CLoader__DeallocLoaderEntry(CLoader* thisx, CLoaderEntry* entry) {
     OSIntMask mask;

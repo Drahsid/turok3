@@ -43,7 +43,7 @@ def GetNonMatchingFunctions(files):
         with open(file, "r") as f:
             text = strip_c_comments(f.read())
             for match in NON_MATCHING_PATTERN.finditer(text):
-                functions.append(match.group(1) + match.group(2) + ".s")
+                functions.append(match.group(1) + "/" + match.group(2) + ".s")
 
     return functions
 

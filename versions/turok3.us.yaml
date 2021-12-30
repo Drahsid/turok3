@@ -2,8 +2,12 @@ name: Turok 3
 sha1: a2e0a28dc0d3a48c7c02cb9e4c4b38fe04b2d436
 options:
   basename: turok3
-  target_path: baserom.z64
-  base_path: .
+  base_path: ./us
+  asset_path: ./versions/us/assets
+  build_path: ./versions/us/build
+  target_path: ../baserom.us.z64
+  src_path: ../../src/us
+  symbol_addrs_path: ../symbol_addrs.us.txt
   compiler: GCC
   find_file_boundaries: True
   platform: n64
@@ -23,7 +27,7 @@ segments:
     start: 0x1000
     vram: 0x80000400
     subsegments:
-      - [0x1000, hasm, ../src/asm/SNMAIN]
+      - [0x1000, hasm, ../src/common/asm/SNMAIN]
   - name: code
     type: code
     start: 0x1100

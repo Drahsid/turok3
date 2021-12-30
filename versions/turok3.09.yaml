@@ -125,7 +125,7 @@ segments:
       - [0x82270, asm]
       - [0x8C5F0, asm]
       - [0x8E890, asm]
-      - [0x8E9A0, asm]
+      - [0x8E9A0, c, tengine]
       - [0x91340, asm]
       - [0x921E0, asm]
       - [0x93670, asm]

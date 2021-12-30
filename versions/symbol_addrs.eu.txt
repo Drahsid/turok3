@@ -1,1 +1,5 @@
 main = 0x0020AA50; // type:func
+osInitialize = 0x002DE370; // type:func
+boot = 0x00285BB4; // type:func
+CEngineApp__Boot = 0x00285BD8; // type:func
+gEngineApp = 0x8013D8D0; // type:data

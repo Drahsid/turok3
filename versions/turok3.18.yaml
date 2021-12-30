@@ -117,7 +117,7 @@ segments:
       - [0x7C8D0, asm]
       - [0x87460, asm]
       - [0x897C0, asm]
-      - [0x898D0, asm]
+      - [0x898D0, c, tengine]
       - [0x8C360, asm]
       - [0x8D200, asm]
       - [0x8E690, asm]

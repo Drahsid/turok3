@@ -120,7 +120,7 @@ segments:
       - [0x77D30, asm]
       - [0x82610, asm]
       - [0x84970, asm]
-      - [0x84A80, asm]
+      - [0x84A80, c, tengine]
       - [0x87530, asm]
       - [0x883D0, asm]
       - [0x89860, asm]

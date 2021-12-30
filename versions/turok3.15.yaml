@@ -119,7 +119,7 @@ segments:
       - [0x8E6E0, asm]
       - [0x909B0, asm]
       - [0x909C0, asm]
-      - [0x90AD0, asm]
+      - [0x90AD0, c, tengine]
       - [0x934E0, asm]
       - [0x94380, asm]
       - [0x95810, asm]

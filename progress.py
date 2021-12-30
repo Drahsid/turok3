@@ -13,6 +13,7 @@ parser.add_argument("-s", "--silent", dest='silent', action='store_true', help="
 parser.add_argument("-u", "--update", dest='update', action='store_true', help="Update the readme")
 parser.add_argument("-d", "--dumpcsv", dest='dumpcsv', action='store_true', help="Append progress data to csv file")
 parser.add_argument("-f", "--csvfile", dest='csvfile', type=str, default="")
+parser.add_argument("-v", "--version", dest='gameversion', type=str, default="us")
 args = parser.parse_args()
 
 NON_MATCHING_PATTERN = re.compile(
@@ -92,8 +93,9 @@ def UpdateReadme(tofind, pct):
     with open('README.md', 'w') as file:
         file.write(filedata)
 
-
-mapFile = ReadAllLines("build/" + PROGRAM + ".map")
+versionDir = "versions/" + args.gameversion + "/"
+buildDir = versionDir + "build/"
+mapFile = ReadAllLines(buildDir + PROGRAM + "." + args.gameversion + ".map")
 src = 0
 asm = 0
 
@@ -106,20 +108,31 @@ for line in mapFile:
         objFile = lineSplit[3]
 
         if (section == ".text"):
-            if (objFile.startswith("build/src")):
+            if (objFile.startswith(buildDir + "src")):
                 src += size
-            elif (objFile.startswith("build/asm")):
+            elif (objFile.startswith(buildDir + "asm")):
                 asm += size
 
 total = src + asm
 
 nonMatchingFunctions = []
-nonMatchingSize = GetNonMatchingSize("asm/nonmatchings")
+nonMatchingSize = GetNonMatchingSize(versionDir + "asm/nonmatchings")
 srcSize = src - nonMatchingSize
 asmSize = asm + nonMatchingSize
 
-nonMatchingFunctions = GetNonMatchingFunctions(GetFiles("src", ".c"))
-nonMatchingSize = GetNonMatchingSize("asm/nonmatchings")
+nonMatchingFunctions = GetNonMatchingFunctions(GetFiles("src/" + args.gameversion, ".c"))
+nonMatchingFunctionsCommon = GetNonMatchingFunctions(GetFiles("src/common", ".c"))
+
+# Add nonMatchingFunctions from common to list
+for nonMatchingFunc in nonMatchingFunctionsCommon:
+    nonMatchingFunctions.append(nonMatchingFunc)
+
+# Fix paths
+for index in range(len(nonMatchingFunctions)):
+    nonMatchingFunctions[index] = versionDir + nonMatchingFunctions[index]
+
+
+nonMatchingSize = GetNonMatchingSize(versionDir + "asm/nonmatchings")
 nonMatchingSrcSize = src - nonMatchingSize
 nonMatchingAsmSize = asm + nonMatchingSize
 
@@ -239,7 +252,6 @@ for levels in levelNames:
     totalLevels += len(levels)
 
 
-
 if (args.dumpcsv):
     git_object = git.Repo().head.object
     data = [
@@ -274,6 +286,7 @@ if (not args.silent):
     levelName = levelNames[chapter][levelIndex]
     psg = math.floor((srcSize / total) * 5)
 
+    print(args.gameversion)
     print("0x" + (hexformat % total).upper() + " total bytes of decompilable code")
     print("\033[0;32m0x" + (hexformat % srcSize).upper() + " / 0x" + (hexformat % total).upper() + " matching   (" + str(srcPct) + "%)\033[0;0m")
     print("\033[0;33m0x" + (hexformat % nonMatchingSrcSize).upper() + " / 0x" + (hexformat % total).upper() + " decompiled (" + str(nonMatchingSrcPct) + "%)\033[0;0m")

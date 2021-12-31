@@ -88,7 +88,7 @@ segments:
       - [0x439F0, asm]
       - [0x43FD0, asm]
       - [0x444C0, asm]
-      - [0x445A0, asm]
+      - [0x445A0, c, ../common/sysrc]
       - [0x44660, asm]
       - [0x45160, asm]
       - [0x47200, asm]

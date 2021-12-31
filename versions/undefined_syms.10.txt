@@ -1,0 +1,1 @@
+__bss_objend = 0x801AC000;

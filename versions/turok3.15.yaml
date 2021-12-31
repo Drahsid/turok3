@@ -87,7 +87,7 @@ segments:
       - [0x4CA80, asm]
       - [0x4D060, asm]
       - [0x4D550, asm]
-      - [0x4D630, asm]
+      - [0x4D630, c, ../common/sysrc]
       - [0x4D6F0, asm]
       - [0x4E1F0, asm]
       - [0x50270, asm]

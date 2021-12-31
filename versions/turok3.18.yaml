@@ -85,7 +85,7 @@ segments:
       - [0x45E50, asm]
       - [0x46430, asm]
       - [0x46920, asm]
-      - [0x46A00, asm]
+      - [0x46A00, c, ../common/sysrc]
       - [0x46AC0, asm]
       - [0x475C0, asm]
       - [0x49660, asm]

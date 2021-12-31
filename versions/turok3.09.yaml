@@ -91,7 +91,7 @@ segments:
       - [0x4B980, asm]
       - [0x4BF60, asm]
       - [0x4C450, asm]
-      - [0x4C530, asm]
+      - [0x4C530, c, ../common/sysrc]
       - [0x4C5F0, asm]
       - [0x4D0F0, asm]
       - [0x4F130, asm]

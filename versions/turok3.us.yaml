@@ -89,7 +89,7 @@ segments:
       - [0x43A40, c, list]
       - [0x44020, c, loader]
       - [0x44510, c, mutex]
-      - [0x445F0, c, sysrc]
+      - [0x445F0, c, ../common/sysrc]
       - [0x446B0, asm]
       - [0x451B0, asm]
       - [0x47250, asm]

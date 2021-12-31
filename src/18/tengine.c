@@ -6,7 +6,7 @@ INCLUDE_ASM("asm/nonmatchings/tengine", func_288E54);
 
 INCLUDE_ASM("asm/nonmatchings/tengine", func_289080);
 
-INCLUDE_ASM("asm/nonmatchings/tengine", func_289314);
+INCLUDE_ASM("asm/nonmatchings/tengine", CEngineApp__Main);
 
 INCLUDE_ASM("asm/nonmatchings/tengine", func_289828);
 
@@ -24,7 +24,7 @@ INCLUDE_ASM("asm/nonmatchings/tengine", boot);
 
 INCLUDE_ASM("asm/nonmatchings/tengine", CEngineApp__Boot);
 
-INCLUDE_ASM("asm/nonmatchings/tengine", func_28AA80);
+INCLUDE_ASM("asm/nonmatchings/tengine", CEngineApp__Idle);
 
 INCLUDE_ASM("asm/nonmatchings/tengine", func_28AB00);
 
@@ -38,9 +38,9 @@ INCLUDE_ASM("asm/nonmatchings/tengine", func_28AC78);
 
 INCLUDE_ASM("asm/nonmatchings/tengine", func_28AD24);
 
-INCLUDE_ASM("asm/nonmatchings/tengine", func_28AD38);
+INCLUDE_ASM("asm/nonmatchings/tengine", idle);
 
-INCLUDE_ASM("asm/nonmatchings/tengine", func_28AD60);
+INCLUDE_ASM("asm/nonmatchings/tengine", mainproc);
 
 INCLUDE_ASM("asm/nonmatchings/tengine", func_28ADBC);
 

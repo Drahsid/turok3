@@ -89,7 +89,7 @@ segments:
       - [0x49D20, asm]
       - [0x4A300, asm]
       - [0x4A7F0, asm]
-      - [0x4A8D0, asm]
+      - [0x4A8D0, c, ../common/sysrc]
       - [0x4A990, asm]
       - [0x4D390, asm]
       - [0x4DC40, asm]

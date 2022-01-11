@@ -2,7 +2,6 @@ name: Turok 3
 sha1: 6d729d261ed8d8e785a32305e613836e059383af
 options:
   basename: turok3
-  target_path: baserom.3-5-2000.z64
   base_path: ./3-5-2000
   asset_path: ./versions/3-5-2000/assets
   build_path: ./versions/3-5-2000/build

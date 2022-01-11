@@ -1,1 +1,1 @@
-make nukeall && ./setupall.sh && make GAME_VERSION=3-5-2000 -j && make GAME_VERSION=09 -j && make GAME_VERSION=10 -j && make GAME_VERSION=15 -j && make GAME_VERSION=16-7-2000 -j && make GAME_VERSION=18 -j && make GAME_VERSION=eu -j && make GAME_VERSION=us -j && ./checkall.sh
+make nukeall && ./setupall.sh && make GAME_VERSION=3-5-2000 -j && make GAME_VERSION=09 -j && make GAME_VERSION=10 -j && make GAME_VERSION=11 -j && make GAME_VERSION=15 -j && make GAME_VERSION=16-7-2000 -j && make GAME_VERSION=18 -j && make GAME_VERSION=eu -j && make GAME_VERSION=us -j && ./checkall.sh

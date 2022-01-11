@@ -36,6 +36,7 @@ Depending on the versions you wish to work with, you must rename the roms and mo
 |8/5/2000|May  3 2000.17:33:41|baserom.3-5-2000.z64|3-5-2000|
 |N4TKER09|May 31 2000.17:25:23|baserom.09.z64|09|
 |N4TKER10|Jun  6 2000.16:39:55|baserom.10.z64|10|
+|N4TKER11|Jun 12 2000.16:23:15|baserom.11.z64|11|
 |N4TKER15|Jun 26 2000.16:43:34|baserom.15.z64|15|
 |N4TKER18|Jul 10 2000.11:01:57|baserom.18.z64|18|
 |16/7/2000|Jul 16 2000.21:14:12|baserom.16-7-2000.z64|16-7-2000|

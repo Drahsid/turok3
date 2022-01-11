@@ -7,6 +7,8 @@ else ifeq ($(GAME_VERSION),09)
 VERSION = 09
 else ifeq ($(GAME_VERSION),10)
 VERSION = 10
+else ifeq ($(GAME_VERSION),11)
+VERSION = 11
 else ifeq ($(GAME_VERSION),15)
 VERSION = 15
 else ifeq ($(GAME_VERSION),18)

@@ -56,7 +56,7 @@ to enable any of these, append `FLAG=1` to the end of the `make` command.
 |Flag|Description|
 |:--|:--|
 |ALLOW_SHIFTY_PSEUDOOPS|When this flag is enabled, pseudo-op fixups will not be applied|
-|GAME_VERSION|This value can be `3-5-2000`, `09`, `10`, `15`, `18`, `16-7-2000`, `us`, or `eu`, and should correspond with the version of the game that you are working with. The default is `us`|
+|GAME_VERSION|This value can be `3-5-2000`, `09`, `10`, `11`, `15`, `18`, `16-7-2000`, `us`, or `eu`, and should correspond with the version of the game that you are working with. The default is `us`|
 |IGNORE_PSEUDOOPS|When this flag is enabled, functions that are `NON_MATCHING` due to modern-as pseudo-ops will be treated as matching|
 |NON_MATCHING|When this flag is enabled, `NON_MATCHING` functions will be built instead of their assembly|
 |ORIGINAL_AS_TESTS|When this flag is enabled, `IGNORE_PSEUDOOPS` and `ALLOW_SHIFTY_PSEUDOOPS` are implied and the build system will try to use the original assembler|

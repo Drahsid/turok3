@@ -118,6 +118,7 @@ nukeall:
 	rm -rf $(VERSIONS_DIR)/3-5-2000
 	rm -rf $(VERSIONS_DIR)/09
 	rm -rf $(VERSIONS_DIR)/10
+	rm -rf $(VERSIONS_DIR)/11
 	rm -rf $(VERSIONS_DIR)/15
 	rm -rf $(VERSIONS_DIR)/16-7-2000
 	rm -rf $(VERSIONS_DIR)/18

@@ -12,8 +12,8 @@ typedef unsigned long long int uint64_t;
 typedef uint32_t SIZE_TYPE;
 typedef uint32_t UNK_TYPE;
 
-#define NULL 0
-#define NULLPTR 0
+#define NULL (0)
+#define NULLPTR (0)
 
 // TODO: Remove (should be in libultra)
 #define	OS_K0_TO_PHYSICAL(x) (u32)(((char *)(x)-0x80000000))

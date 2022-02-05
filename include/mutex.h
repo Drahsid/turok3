@@ -45,7 +45,13 @@ static inline void CMutex__End(CMutex* thisx) {
     }
 }
 
+#ifdef NO_DEFINE_FUNCS
+static inline void CBlocker__Construct(CBlocker* thisx) {
+    osCreateMesgQueue(&thisx->queue, &thisx->msg, 1);
+}
+#else
 #define CBlocker__Construct(THISX) (osCreateMesgQueue(&(THISX)->queue, &(THISX)->msg, 1))
+#endif
 
 #endif
 

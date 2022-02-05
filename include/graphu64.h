@@ -3,9 +3,23 @@
 
 #include "common_structs.h"
 
+#ifdef NO_DEFINE_FUNCS
+static inline float CVector3__Dot(CVector3* lhs, CVector3* rhs) {
+    return lhs->x * rhs->x + lhs->y * rhs->y + lhs->z * rhs->z;
+}
+
+static inline float CVector3__SquareMagnitude(CVector3* thisx) {
+    return thisx->x * thisx->x + thisx->y * thisx->y + thisx->z * thisx->z;
+}
+
+static inline float CVector3__Magnitude(CVector3* thisx) {
+    return sqrtf(CVector3__SquareMagnitude(thisx));
+}
+#else
 #define CVector3__Dot(LHS, RHS) ((LHS)->x * (RHS)->x + (LHS)->y * (RHS)->y + (LHS)->z * (RHS)->z)
 #define CVector3__SquareMagnitude(THIS) ((THIS)->x * (THIS)->x + (THIS)->y * (THIS)->y + (THIS)->z * (THIS)->z)
 #define CVector3__Magnitude(THIS) (sqrtf(CVector3__SquareMagnitude(THIS)))
+#endif
 
 static inline void CVector3__Add(CVector3* thisx, CVector3* lhs, CVector3* rhs) {
     thisx->x = lhs->x + rhs->x;

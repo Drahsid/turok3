@@ -53,8 +53,7 @@ OBJDUMP = $(CROSS)objdump
 OBJCOPY = $(CROSS)objcopy
 PYTHON  = python3
 N64CRC  = $(TOOLS_DIR)/n64crc
-LNKCONV = $(TOOLS_DIR)/lnkconv/lnkconv
-LNKASM	= $(TOOLS_DIR)/lnkconv/link.s
+LNKCONV = $(TOOLS_DIR)/psyq-obj-parser
 CC      = $(TOOLS_DIR)/mips-gcc/cc1
 
 # Flags
@@ -131,7 +130,6 @@ clean:
 ifeq ($(ORIGINAL_AS_TESTS),1)
 setup: dirs
 	$(PYTHON) $(TOOLS_DIR)/splat/split.py $(VERSIONS_DIR)/$(BASENAME).$(VERSION).yaml
-	dos2unix asm/nonmatchings/**/**
 else
 setup: dirs
 	$(PYTHON) $(TOOLS_DIR)/splat/split.py $(VERSIONS_DIR)/$(BASENAME).$(VERSION).yaml
@@ -158,24 +156,13 @@ $(BUILD_DIR)/%.c.s: $(BUILD_DIR)/%.i
 	$(CC) $(CC_FLAGS) -o $@ $<
 
 ifeq ($(ORIGINAL_AS_TESTS),1)
-$(BUILD_DIR)/%.c.o.sn: $(BUILD_DIR)/%.c.s
-	mkdir -p $@_pre
+$(BUILD_DIR)/%.c.obj: $(BUILD_DIR)/%.c.s
 	unix2dos $<
+	unix2dos include/macro.inc
 	$(ASN64) $(ASM_FLAGS) -o $@ $<
 
-$(BUILD_DIR)/%.c.o: $(BUILD_DIR)/%.c.o.sn
-	$(LNKCONV) $<
-	@mv out_text.bin         $<_pre/out_text.bin
-	@mv functions.s          $<_pre/functions.s
-	@mv out_data.bin         $<_pre/out_data.bin
-	@mv out_rodata.bin       $<_pre/out_rodata.bin
-	@mv bss_length.s         $<_pre/bss_length.s
-	@mv out_bss_syms.txt     $<_pre/out_bss_syms.txt
-	@mv out_data_syms.txt    $<_pre/out_data_syms.txt
-	@mv out_rodata_syms.txt  $<_pre/out_rodata_syms.txt
-	@mv out_text_syms.txt    $<_pre/out_text_syms.txt
-	@cp $(LNKASM) $<_pre/link.s
-	$(AS) $(AS_FLAGS) -I$<_pre/ -o $@ $<_pre/link.s
+$(BUILD_DIR)/%.c.o: $(BUILD_DIR)/%.c.obj
+	$(LNKCONV) $< -o $@
 else
 $(BUILD_DIR)/%.c.o: $(BUILD_DIR)/%.c.s
 	$(AS) $(AS_FLAGS) -o $@ $<
@@ -187,11 +174,8 @@ $(BUILD_DIR)/%.s.o: %.s
 $(BUILD_DIR)/%.bin.o: %.bin
 	$(LD) -r -b binary -o $(@:$(BUILD_DIR)/$(VERSION_DIR)/%=$(BUILD_DIR)/%) $<
 
-$(TARGET).bin: $(TARGET).elf
+$(TARGET).z64: $(TARGET).elf
 	$(OBJCOPY) $(OBJCOPY_FLAGS) $< $@
-
-$(TARGET).z64: $(TARGET).bin
-	@cp $< $@
 
 $(N64CRC): $(TOOLS_DIR)/n64crc.c
 	make -C tools

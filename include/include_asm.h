@@ -34,14 +34,14 @@ __asm__( \
     "\t.set at\n" \
     "\t.end\t"#NAME \
 );
-#endif
-#endif
+#endif // ORIGINAL_AS_TESTS
+#endif // INCLUDE_ASM
 // don't include this if we want to use modern as pseudo-ops
 #if !defined(ALLOW_SHIFTY_PSEUDOOPS)
 __asm__(".include \"include/pseudoops.inc\"\n");
-#endif
+#endif // !defined(ALLOW_SHIFTY_PSEUDOOPS)
 #else
 #define INCLUDE_ASM(FOLDER, NAME, ...)
-#endif
+#endif // !defined(SPLAT) && !defined(__CTX__) && !defined(PERMUTER)
 
-#endif
+#endif // __INCLUDE_ASM_H__

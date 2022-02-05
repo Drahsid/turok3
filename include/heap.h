@@ -22,10 +22,16 @@ typedef struct {
 
 extern CHeap gHeap;
 
-#define Malloc(SIZE) (CHeap__Alloc(&gHeap, SIZE))
-
 extern void CHeap__Construct(CHeap* thisx, void* start, uint32_t length);
 extern void* CHeap__Alloc(CHeap* thisx, SIZE_TYPE size);
+
+#ifdef NO_DEFINE_FUNCS
+static inline SIZE_TYPE Malloc(SIZE_TYPE size) {
+    return CHeap__Alloc(&gHeap, size);
+}
+#else
+#define Malloc(SIZE) (CHeap__Alloc(&gHeap, SIZE))
+#endif
 
 #endif
 

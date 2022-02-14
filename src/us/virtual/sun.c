@@ -2,8 +2,8 @@
 #include "graphu64.h"
 #include "common.h"
 
-// CVector3__Normalize is pseudo-op hell
-#if defined(NON_MATCHING) || defined(ORIGINAL_AS_TESTS) || defined(IGNORE_PSEUDOOPS)
+// need .rdata
+#if defined(NON_MATCHING)
 void CSun__Construct(CSun* thisx) {
     thisx->dir.x = -0.667424f;
     thisx->dir.y = 2.0f * 0.476731f;

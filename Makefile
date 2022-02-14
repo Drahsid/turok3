@@ -46,7 +46,7 @@ LD_SCRIPT = $(VERSION_DIR)/$(BASENAME).ld
 
 CROSS   = mips-linux-gnu-
 AS      = $(CROSS)as
-ASN64   = wine $(TOOLS_DIR)/mips-gcc/asn64.exe
+ASN64   = $(TOOLS_DIR)/mips-gcc/asn64.exe
 CPP     = cpp
 LD      = $(CROSS)ld
 OBJDUMP = $(CROSS)objdump
@@ -64,32 +64,15 @@ ASM_FLAGS        = -I include -mips3
 D_FLAGS          = -D_LANGUAGE_C -DF3DEX_GBI_2 -D__GNUC__=2 -DGAME_VERSION=\"$(VERSION)\"
 
 # Additional defines
-ifeq ($(ORIGINAL_AS_TESTS),1)
-D_FLAGS += -DORIGINAL_AS_TESTS -DIGNORE_PSEUDOOPS -DALLOW_SHIFTY_PSEUDOOPS
-endif
-
-ifeq ($(IGNORE_PSEUDOOPS),1)
-D_FLAGS += -DIGNORE_PSEUDOOPS
-endif
-
-ifeq ($(ALLOW_SHIFTY_PSEUDOOPS),1)
-D_FLAGS += -DALLOW_SHIFTY_PSEUDOOPS
-endif
-
 ifeq ($(NON_MATCHING),1)
 D_FLAGS += -DNON_MATCHING
 endif
 
-CC_FLAGS      = -quiet -G 0 -mips3 -mcpu=R4300 $(OPT_FLAGS) -mfp64 # T2's original compiler had these default options: -mgas -meb -mcpu=R4300
+# T2's original compiler had these default options: -mgas -meb -mcpu=R4300
+CC_FLAGS      = -quiet -G0 -mips3 $(OPT_FLAGS) -mgas -meb -mcpu=VR4300 -mhard-float -mfp64
 CPP_FLAGS     = -P -undef -Wall -lang-c $(D_FLAGS) $(INCLUDE_CC_FLAGS) -nostdinc
 LD_FLAGS      = -T $(LD_SCRIPT) -Map $(TARGET).map -T $(VERSION_DIR)/undefined_syms_auto.txt -T $(VERSION_DIR)/undefined_funcs_auto.txt -T $(VERSIONS_DIR)/undefined_funcs.$(VERSION).txt -T $(VERSIONS_DIR)/undefined_syms.$(VERSION).txt --no-check-sections
 OBJCOPY_FLAGS = -O binary
-
-ifeq ($(ORIGINAL_AS_TESTS),1)
-CC_FLAGS += -fno-delayed-branch
-else
-CC_FLAGS += -mrnames # make output .s files easier to read
-endif
 
 ### Optimisation Overrides
 
@@ -127,13 +110,8 @@ nukeall:
 clean:
 	rm -rf $(BUILD_DIR)
 
-ifeq ($(ORIGINAL_AS_TESTS),1)
 setup: dirs
 	$(PYTHON) $(TOOLS_DIR)/splat/split.py $(VERSIONS_DIR)/$(BASENAME).$(VERSION).yaml
-else
-setup: dirs
-	$(PYTHON) $(TOOLS_DIR)/splat/split.py $(VERSIONS_DIR)/$(BASENAME).$(VERSION).yaml
-endif
 
 context:
 	rm -f ctx.c ctx_includes.c
@@ -153,20 +131,15 @@ $(BUILD_DIR)/%.i: %.c
 	$(CPP) -MMD -MP -MT $@ -MF $@.d $(CPP_FLAGS) -o $@ $<
 
 $(BUILD_DIR)/%.c.s: $(BUILD_DIR)/%.i
+	unix2dos $<
 	$(CC) $(CC_FLAGS) -o $@ $<
 
-ifeq ($(ORIGINAL_AS_TESTS),1)
 $(BUILD_DIR)/%.c.obj: $(BUILD_DIR)/%.c.s
 	unix2dos $<
-	unix2dos include/macro.inc
 	$(ASN64) $(ASM_FLAGS) -o $@ $<
 
 $(BUILD_DIR)/%.c.o: $(BUILD_DIR)/%.c.obj
-	$(LNKCONV) $< -o $@
-else
-$(BUILD_DIR)/%.c.o: $(BUILD_DIR)/%.c.s
-	$(AS) $(AS_FLAGS) -o $@ $<
-endif
+	$(LNKCONV) $< -o $@ -b -n
 
 $(BUILD_DIR)/%.s.o: %.s
 	$(AS) $(AS_FLAGS) -o $(@:$(BUILD_DIR)/$(VERSION_DIR)/%=$(BUILD_DIR)/%) $<

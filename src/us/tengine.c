@@ -343,15 +343,11 @@ void mainproc(void* arg) {
     CEngineApp__Main(GetApp());
 }
 
-#if defined(NON_MATCHING) || defined(ORIGINAL_AS_TESTS) || defined(IGNORE_PSEUDOOPS)
 void CEngineApp__InitFade(CEngineApp* thisx) {
     thisx->unk_0x28825 = 1;
     thisx->fadeAlpha = 0;
     thisx->unk_0x28824 = 0;
 }
-#else
-INCLUDE_ASM("asm/nonmatchings/tengine", CEngineApp__InitFade);
-#endif
 
 INCLUDE_ASM("asm/nonmatchings/tengine", func_285FC4);
 
@@ -359,7 +355,6 @@ INCLUDE_ASM("asm/nonmatchings/tengine", func_286058);
 
 INCLUDE_ASM("asm/nonmatchings/tengine", func_28607C);
 
-#if defined(NON_MATCHING) || defined(ORIGINAL_AS_TESTS) || defined(IGNORE_PSEUDOOPS)
 void CEngineApp__Retrace(CEngineApp* thisx) {
     if (gFirstFrame) {
         gFirstFrame = 0;
@@ -380,9 +375,6 @@ void CEngineApp__Retrace(CEngineApp* thisx) {
 
     gRetraceCount++;
 }
-#else
-INCLUDE_ASM("asm/nonmatchings/tengine", CEngineApp__Retrace);
-#endif
 
 INCLUDE_ASM("asm/nonmatchings/tengine", func_2862C8);
 

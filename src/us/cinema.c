@@ -81,16 +81,11 @@ INCLUDE_ASM("asm/nonmatchings/cinema", func_232700);
 
 INCLUDE_ASM("asm/nonmatchings/cinema", func_232718);
 
-// c.le.fmt pseudo-op causes NON_MATCHING (we are missing the following nops)
-#if defined(NON_MATCHING) || defined(ORIGINAL_AS_TESTS) || defined(IGNORE_PSEUDOOPS)
 int32_t Cinema_PathPlaying(void) {
     return (gCinemaPlayerP->playing)
         && (gCinemaPlayerP->currentTime >= gCinemaPlayerP->pathBegin)
         && (gCinemaPlayerP->currentTime <= gCinemaPlayerP->pathEnd);
 }
-#else
-INCLUDE_ASM("asm/nonmatchings/cinema", Cinema_PathPlaying);
-#endif
 
 INCLUDE_ASM("asm/nonmatchings/cinema", func_232774);
 

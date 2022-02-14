@@ -10,7 +10,8 @@ void CSunFrameData__Construct(CSunFrameData* thisx) {
 void func_283D7C(void) {
 }
 
-#if defined(NON_MATCHING) || defined(ORIGINAL_AS_TESTS) || defined(IGNORE_PSEUDOOPS)
+// needs .rdata
+#if defined(NON_MATCHING)  //|| defined(NEW_ORIGINAL_AS_TEST)
 void CSun__SetSunDir(CSun* thisx, CVector3* dir) {
     thisx->dir = *dir;
     CVector3__Normalize(&thisx->dir);

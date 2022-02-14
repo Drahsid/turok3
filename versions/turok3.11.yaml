@@ -4,11 +4,9 @@ options:
   basename: turok3
   target_path: ../baserom.11.z64
   base_path: ./11
-  asset_path: ./versions/11/assets
-  build_path: ./versions/11/build
   src_path: ../../src/11
   symbol_addrs_path: ../symbol_addrs.11.txt
-  compiler: GCC
+  compiler: SN64
   find_file_boundaries: True
   platform: n64
   generated_c_preamble: "#include \"include_asm.h\""

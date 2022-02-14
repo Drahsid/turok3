@@ -3,12 +3,10 @@ sha1: f3fdc0b58d0ae8111f033c5f61c364e6a9425f91
 options:
   basename: turok3
   base_path: ./eu
-  asset_path: ./versions/eu/assets
-  build_path: ./versions/eu/build
   target_path: ../baserom.eu.z64
   src_path: ../../src/eu
   symbol_addrs_path: ../symbol_addrs.eu.txt
-  compiler: GCC
+  compiler: SN64
   find_file_boundaries: True
   platform: n64
   generated_c_preamble: "#include \"include_asm.h\""

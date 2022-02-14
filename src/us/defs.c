@@ -4,7 +4,7 @@ INCLUDE_ASM("asm/nonmatchings/defs", func_252890);
 
 INCLUDE_ASM("asm/nonmatchings/defs", func_252AEC);
 
-// OK besides delay slot optimization (this is possibly pseudo-op)
+// regalloc, instruction order
 #ifdef NON_MATCHING
 SIZE_TYPE GetMemSize(void) {
     if (osMemSize <= 0x007FFFFF) {

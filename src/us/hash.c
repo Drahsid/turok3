@@ -2,11 +2,12 @@
 #include "heap.h"
 #include "include_asm.h"
 
+// TODO: locate this split
+#ifdef NON_MATCHING_DATA
 uint32_t gHashSize = 0;
 uint32_t gHashTableSize = 0;
 
-// TODO: locate this split
-#ifdef NON_MATCHING
+// another split
 uint32_t gHashMask;
 uint32_t gHashTableMask;
 HashEntry* gHashTable;
@@ -17,7 +18,7 @@ static inline uint32_t RoundToPowerOfTwo(uint32_t x) {
     int32_t high_bit = 0;
     int32_t index;
 
-    for (index = 0; index < sizeof(x) * 8; index++) {
+    for (index = 0; index < (int32_t)(sizeof(x) * 8); index++) {
         if (x & (1 << index)) {
             num_bits++;
             high_bit = index;
@@ -32,7 +33,6 @@ static inline uint32_t RoundToPowerOfTwo(uint32_t x) {
 }
 
 
-#if defined(NON_MATCHING) || defined(ORIGINAL_AS_TESTS) || defined(IGNORE_PSEUDOOPS)
 void CHashTable__Construct(uint32_t num_entries) {
     int32_t index;
 
@@ -49,9 +49,6 @@ void CHashTable__Construct(uint32_t num_entries) {
         gHashTable[index].index = index;
     }
 }
-#else
-INCLUDE_ASM("asm/nonmatchings/hash", CHashTable__Construct);
-#endif
 
 INCLUDE_ASM("asm/nonmatchings/hash", func_242644);
 

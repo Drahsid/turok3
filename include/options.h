@@ -64,8 +64,8 @@ typedef struct {
     /* 0x026 */ uint8_t unk_0x26;
     /* 0x027 */ uint8_t unk_0x27;
     /* 0x028 */ uint8_t unk_0x28[0x180];
-    /* 0x1A8 */ CPlayerOptions singePlayerOptions;
-    /* 0x2B0 */ CPlayerOptions multiPlayerOptions[MAX_PLAYERS];
+    /* 0x1A8 */ CPlayerOptions singlePlayerOptions; // "m_SinglePlayerOptions"
+    /* 0x2B0 */ CPlayerOptions multiPlayerOptions[MAX_PLAYERS]; // "m_MultiPlayerOptions"
     /* 0x6D0 */ CPlayerControlOptions playerControlOptions[MAX_PLAYERS]; // unknown source name
 } COptions; /* sizeof = 0x6F0 */
 

@@ -58,7 +58,7 @@ CC      = $(TOOLS_DIR)/mips-gcc/cc1
 
 # Flags
 OPT_FLAGS        = -O2
-INCLUDE_CC_FLAGS = -I. -Iinclude -Ilibreultra/include/2.0I
+INCLUDE_CC_FLAGS = -I. -Iinclude -Iultralib/include
 AS_FLAGS         = -EB -mtune=vr4300 -march=vr4300 -mabi=32 -mips3 -O1 -I include
 ASM_FLAGS        = -I include -mips3
 D_FLAGS          = -D_LANGUAGE_C -DF3DEX_GBI_2 -D__GNUC__=2 -DGAME_VERSION=\"$(VERSION)\"

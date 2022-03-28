@@ -296,9 +296,11 @@ segments:
     type: code
     start: 0xF2D80
     subalign: 4
-    vram: 0x800F4180
+    vram: 0x800F2180
     subsegments:
-      - [0xF2D80, bin] # put code segment data here
+      - [0xF2D80, data, main]
+      - [0xF2D90, data]
+  - [0xF2DB0, bin]
   - name: virtual
     type: code
     start: 0x115760

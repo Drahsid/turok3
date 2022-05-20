@@ -1,5 +1,5 @@
 BASENAME = turok3
-VERSION  = us
+GAME_VERSION ?= us
 
 ifeq ($(GAME_VERSION),3-5-2000)
 VERSION = 3-5-2000
@@ -19,6 +19,8 @@ else ifeq ($(GAME_VERSION),us)
 VERSION = us
 else ifeq ($(GAME_VERSION),eu)
 VERSION = eu
+else
+$(error Invalid game version $(GAME_VERSION))
 endif
 
 VERSIONS_DIR = versions
@@ -46,7 +48,7 @@ LD_SCRIPT = $(VERSION_DIR)/$(BASENAME).ld
 
 CROSS   = mips-linux-gnu-
 AS      = $(CROSS)as
-ASN64   = $(TOOLS_DIR)/mips-gcc/asn64.exe
+ASN64   = wine $(TOOLS_DIR)/mips-gcc/asn64.exe
 CPP     = cpp
 LD      = $(CROSS)ld
 OBJDUMP = $(CROSS)objdump
@@ -109,6 +111,8 @@ nukeall:
 
 clean:
 	rm -rf $(BUILD_DIR)
+	rm -f gccdump*
+	rm -f nul.s
 
 setup: dirs
 	$(PYTHON) $(TOOLS_DIR)/splat/split.py $(VERSIONS_DIR)/$(BASENAME).$(VERSION).yaml

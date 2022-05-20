@@ -159,9 +159,9 @@ INCLUDE_ASM("asm/nonmatchings/cache", func_24146C);
 
 INCLUDE_ASM("asm/nonmatchings/cache", func_24156C);
 
-INCLUDE_ASM("asm/nonmatchings/cache", func_2416F0);
+INCLUDE_ASM("asm/nonmatchings/cache", CCache__LoadPersistantIndex);
 
-INCLUDE_ASM("asm/nonmatchings/cache", func_241860);
+INCLUDE_ASM("asm/nonmatchings/cache", CCache__LoadPersistantSubBlock);
 
 INCLUDE_ASM("asm/nonmatchings/cache", func_2418D4);
 

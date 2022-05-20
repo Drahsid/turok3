@@ -9,7 +9,10 @@ typedef struct {
     /* 0x00000 */ int32_t levelStatus; // "m_LevelStatus"
     /* 0x00004 */ int32_t isPersistentDataLoaded; // "m_bPersistentDataLoaded"
     /* 0x00008 */ uint32_t levelIntroFlags; // "m_LevelIntroPlayedFlags"
-    /* 0x0000C */ uint8_t unk_0xC[0x10];
+    /* 0x0000C */ UNK_TYPE unk_0xC;
+    /* 0x00010 */ UNK_TYPE unk_0x10;
+    /* 0x00014 */ UNK_TYPE unk_0x14;
+    /* 0x00018 */ UNK_TYPE unk_0x18;
     /* 0x0001C */ void* rpLevels; // "m_rpLevels"
     /* 0x00020 */ void* rpLevel; // "m_rpLevel"
     /* 0x00024 */ void* rpTextureSets; // "m_rpTextureSets"
@@ -68,10 +71,55 @@ typedef struct {
     /* 0x000F8 */ struct CMemEntry* unk_0xF8;
     /* 0x000FC */ struct CMemEntry* memEntryLevelNavVision; // "m_pmeLevelNavVision"
     /* 0x00100 */ struct CMemEntry* memEntryVisibility; // "m_pmeVisibility"
-    /* 0x00104 */ uint8_t unk_0x104[0x1D32C];
+    /* 0x00104 */ uint8_t unk_0x104[0x1C];
+    /* 0x00120 */ UNK_TYPE unk_0x120;
+    /* 0x00124 */ UNK_TYPE unk_0x124;
+    /* 0x00128 */ uint8_t unk_0x128[0x1CBE0];
+    /* 0x1CD08 */ UNK_TYPE unk_0x1CD08;
+    /* 0x1CD0C */ uint8_t unk_0x1CD0C[0x12C];
+    /* 0x1CE38 */ int32_t levelIndex; // "m_nLevel"
+    /* 0x1CE3C */ uint8_t unk_0x1CE3C[0x44];
+    /* 0x1CE80 */ CGameSection unk_0x1CE80;
+    /* 0x1CE9C */ CGameSection unk_0x1CE9C;
+    /* 0x1CEB8 */ CGameSection unk_0x1CEB8;
+    /* 0x1CED4 */ CGameSection unk_0x1CED4;
+    /* 0x1CEF0 */ CGameSection unk_0x1CEF0;
+    /* 0x1CF0C */ CGameSection unk_0x1CF0C;
+    /* 0x1CF28 */ uint8_t unk_0x1CF28[0x178];
+    /* 0x1D0A0 */ UNK_TYPE unk_0x1D0A0;
+    /* 0x1D0A4 */ UNK_TYPE unk_0x1D0A4;
+    /* 0x1D0A8 */ UNK_TYPE unk_0x1D0A8;
+    /* 0x1D0AC */ UNK_TYPE unk_0x1D0AC;
+    /* 0x1D0B0 */ UNK_TYPE unk_0x1D0B0;
+    /* 0x1D0B4 */ UNK_TYPE unk_0x1D0B4;
+    /* 0x1D0B8 */ uint8_t unk_0x1D0B8[0x44];
+    /* 0x1D0FC */ UNK_TYPE unk_0x1D0FC;
+    /* 0x1D100 */ uint8_t unk_0x1D100[0x40];
+    /* 0x1D140 */ UNK_TYPE unk_0x1D140;
+    /* 0x1D144 */ uint8_t unk_0x1D144[0x1C];
+    /* 0x1D160 */ UNK_TYPE unk_0x1D160;
+    /* 0x1D16C */ uint8_t unk_0x1D164[0x2A4];
+    /* 0x1D408 */ UNK_TYPE unk_0x1D408;
+    /* 0x1D40C */ UNK_TYPE unk_0x1D40C;
+    /* 0x1D410 */ UNK_TYPE unk_0x1D410;
+    /* 0x1D414 */ UNK_TYPE unk_0x1D414;
+    /* 0x1D418 */ UNK_TYPE unk_0x1D418;
+    /* 0x1D41C */ UNK_TYPE unk_0x1D41C;
+    /* 0x1D420 */ UNK_TYPE unk_0x1D420;
+    /* 0x1D424 */ UNK_TYPE unk_0x1D424;
+    /* 0x1D428 */ UNK_TYPE unk_0x1D428;
+    /* 0x1D428 */ UNK_TYPE unk_0x1D42C;
 } CScene; /* sizeof = 0x1D430 */
 
 #define GetScene() (&gEngineApp.scene)
+
+extern void CScene__Construct(CScene* thisx, void* romData);
+extern void CScene__DecompressIntelligence(void* notifyId, struct CCacheEntry* cacheEntry);
+extern void CScene__DecompressParticles(void* notifyId, struct CCacheEntry* cacheEntry);
+extern void CScene__ClearListCounts(void);
+extern void CScene__ConstructWarp(CScene* thisx);
+extern void CScene__LoadLevel(CScene* thisx, int32_t levelIndex, int32_t a2);
+extern void CScene__ConstructMap(CScene* thisx, CGameSection* section, int32_t objectIndex);
 
 #endif
 

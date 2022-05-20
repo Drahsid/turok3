@@ -1,6 +1,4 @@
 # Turok 3
-[![Match Status](https://img.shields.io/badge/matched-0.29-brightgreen.svg)]()
-[![Decomp Status](https://img.shields.io/badge/decompiled-0.51-yellow.svg)]()
 
 A in-progress decompilation of Turok 3 for the N64. This project currently focused on the US release, however supports the other versions.
 
@@ -29,7 +27,7 @@ git submodule init
 Navigate to `tools/splat/` and run `pip3 install -r requirements.txt`
 
 ### Prepare the base rom
-Depending on the versions you wish to work with, you must rename the roms and move them into the [version](version) folder. Here is a list for the name that you should give to each rom.
+Depending on the versions you wish to work with, you must rename the rom or roms and move them into the [version](version) folder. Here is a list for the names that you should give to each rom. Note that you only need one of these for the project.
 
 |Version|Build Date|Name|GAME_VERSION|
 |:--|:--|:--|:--|
@@ -48,7 +46,7 @@ Next, to extract the assets and code from the rom, run `make setup GAME_VERSION=
 If `GAME_VERSION` is not provided, it will default to `us`.
 
 ### Build the rom
-Run `make GAME_VERSION=[version]` to build the rom. If `GAME_VERSION` is not provided, it will default to `us`. Currently this can only be run through WSL, since it requires the ability to run the original assembler, which crashes under wine.
+Run `make GAME_VERSION=[version]` to build the rom. If `GAME_VERSION` is not provided, it will default to `us`. You can appent `-j` to speed up the build process.
 
 #### Make Flags
 to enable any of these, append `FLAG=1` to the end of the `make` command.
@@ -66,7 +64,7 @@ to enable any of these, append `FLAG=1` to the end of the `make` command.
 
 **nuke**: fully clean the build and assets for provided `GAME_VERSION`. Will require the setup step to be run again.
 
-**nukeall**: fully clean the build and assets for every version.
+**nukeall**: fully clean the build and assets for every game version.
 
 **context**: generate a `ctx.c` file that can beused with [mips to c](tools/mips_to_c)
 
@@ -81,12 +79,17 @@ This script will nuclearly setup and build every version.
 **[setupall.sh](setupall.sh)**
 This script will run the `setup` step for every version.
 
+**[regnames.sh](regnames.sh)**
+A limitation of the original assembler is that it does not have support for register names (no `-mrnames`.) Because of this, the assembly files that go through the original assembler use the register indexes. To make these more readable, you can pass the file as the first argument of this script to convert it, so that it uses register names.
+
 ### Hierarchy
 At first-glance, the hierarchy of this project might seem like black-magic. Unfortunately, this is difficult to avoid with so many versions of the game to support.
 
-In the [src](src) folder there are various other subdirectorys which correlate to a particular version of the game, and additionally there is the [common](src/common) directory. The [common](src/common) is for files that are matching on various versions of the game, where any differences are gated by ifdefs. The rest of the directories are for files that are unique to, or not matching other versions of the game. The ultimate goal is to inevitably have everything being in the [common](src/common) directory when it is OK.
+In the [src](src) folder there are various other subdirectorys which correlate to a particular version of the game, and additionally there is the [common](src/common) directory. The [common](src/common) is for files that are matching on various versions of the game, where any differences are gated by ifdefs. The rest of the directories are for files that are unique to, or not matching other versions of the game. The ultimate goal is to inevitably have every piece of similar code being in the [common](src/common) directory when it is OK.
 
 In the [versions](versions) folder are the files used to setup, configure, and check each version of the game. Additionally, for each setup version of the game, there will be a folder that corresponds to the `GAME_VERSION`, and when building, the results of the build will be produced in a folder titled `build`, which is inside of the aforementioned folder. For example, after building the us version of the game, the built rom will be produced in the directory `./versions/us/build/`.
+
+For a more in-depth explanation of the contents of the versions folder, navigate [here](versions/README.md)
 
 ## Contributing
 Contributions are welcome. If you would like to reserve a function, open a PR with the function or file name(s).

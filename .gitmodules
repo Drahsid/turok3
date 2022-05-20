@@ -1,3 +1,6 @@
+[submodule "tools/pcsx-redux"]
+	path = tools/pcsx-redux
+	url = https://github.com/Mr-Wiseguy/pcsx-redux.git
 [submodule "tools/asm-differ"]
 	path = tools/asm-differ
 	url = https://github.com/simonlindholm/asm-differ.git
@@ -13,6 +16,3 @@
 [submodule "ultralib"]
 	path = ultralib
 	url = https://github.com/decompals/ultralib.git
-[submodule "tools/pcsx-redux"]
-	path = tools/pcsx-redux
-	url = https://github.com/Mr-Wiseguy/pcsx-redux.git

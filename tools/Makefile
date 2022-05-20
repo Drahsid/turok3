@@ -3,7 +3,7 @@ CC := gcc
 CFLAGS := -I. -Wall -Wextra -Wno-unused-parameter -pedantic -Ofast -s
 
 # Not sure if n64crc has a repo somewhere that I should pull as a submodule
-PROGRAMS := n64crc lnkconv/lnkconv
+PROGRAMS := n64crc lnkconv
 
 default: all
 
@@ -12,8 +12,10 @@ all: $(PROGRAMS)
 n64crc:
 	$(CC) $(CFLAGS) -o $@ $@.c
 
-lnkconv/lnkconv:
-	$(CC) $(CFLAGS) -o $@ lnkconv/main.c
+lnkconv:
+	make -C pcsx-redux
+	make -C pcsx-redux psyq-obj-parser
+	mv pcsx-redux/psyq-obj-parser psyq-obj-parser
 
 clean:
 	rm -f *.o

@@ -27,7 +27,7 @@ def get_c_file(directory):
 
 def import_c_file(in_file):
     in_file = os.path.relpath(in_file, root_dir)
-    cpp_command = ["gcc", "-E", "-P", "-Iinclude", "-Iassets", "-Isrc", "-Ilibreultra/include/2.0I/", "-undef",
+    cpp_command = ["gcc", "-E", "-P", "-Iinclude", "-Iassets", "-Isrc", "-Iultralib/include", "-undef",
                     "-DF3DEX_GBI_2", "-D__GNUC__=2", "-D_LANGUAGE_C", "-DNON_MATCHING", "-D_Static_assert(x, y)=", "-D__attribute__(x)=", "-D__CTX__", in_file]
     try:
         return subprocess.check_output(cpp_command, cwd=root_dir, encoding="utf-8")

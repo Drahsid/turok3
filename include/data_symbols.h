@@ -33,6 +33,8 @@ extern Gfx* gLineList0; // "line_list_a"
 extern Gfx* gLineList1; // "line_list_b"
 extern uint8_t gValidControllerBits; // "ValidControllers"
 extern Gfx* gDList; // "pDList"
+extern uint8_t gLoadSavePersistentData[]; // "load_save_persistent_data"
+extern uint8_t gGamePersistentData[]; // "game_persistent_data"
 extern UNK_TYPE D_80166190;
 extern UNK_TYPE D_801659B0;
 extern float D_800FB0BC;

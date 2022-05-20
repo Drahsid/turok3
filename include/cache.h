@@ -83,6 +83,10 @@ extern CCache gCache;
 extern void CCache__Construct(OSId threadId);
 extern void CCache__Main(void*);
 extern void CCache__Advance(void);
+extern CMemEntry* CCache__LoadPersistantIndex(CISet** dest, void* romAddress, char* description);
+extern CMemEntry* CCache__LoadPersistantSubBlock(CISet* sourceIndex, int32_t blockIndex, void* romAddressBase, void* notifyID, DecompressionCallback decompressCallback, char* description);
+extern int32_t CCache_GetFromLookupTable(int32_t offset);
+extern void CCache__Construct(OSId threadId);
 
 #endif
 

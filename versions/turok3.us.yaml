@@ -3,9 +3,9 @@ sha1: a2e0a28dc0d3a48c7c02cb9e4c4b38fe04b2d436
 options:
   basename: turok3
   base_path: ./us
-  target_path: ../baserom.us.z64
-  src_path: ../../src/us
-  symbol_addrs_path: ../symbol_addrs.us.txt
+  target_path: ../baserom.us.z64 # relative to base_path
+  src_path: ../../src/us # relative to base_path
+  symbol_addrs_path: ../symbol_addrs.us.txt # relative to base_path
   compiler: SN64
   find_file_boundaries: True
   platform: n64
@@ -116,7 +116,7 @@ segments:
       - [0x77230, asm]
       - [0x774E0, asm]
       - [0x77650, asm]
-      - [0x77D30, asm]
+      - [0x77D30, c, scene]
       - [0x82610, asm]
       - [0x84970, c, sun]
       - [0x84A80, c, tengine]
@@ -300,7 +300,9 @@ segments:
     subsegments:
       - [0xF2D80, data, main]
       - [0xF2D90, data]
-  - [0xF2DB0, bin]
+      - [0xF2DB0, bin]
+      - [0xFB6C0, rodata, virtual/scene]
+  - [0xFB890, bin]
   - name: virtual
     type: code
     start: 0x115760
@@ -419,7 +421,7 @@ segments:
       - [0x15E180, asm]
       - [0x15E220, data]
       - [0x15E420, asm]
-      - [0x15E6B0, asm]
+      - [0x15E6B0, c, virtual/scene]
       - [0x161250, c, virtual/sun]
       - [0x161310, c, virtual/tengine]
       - [0x161540, asm]

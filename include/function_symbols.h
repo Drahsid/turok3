@@ -18,7 +18,6 @@ extern void CPool__AllocateStandardBuffers(struct CPool* thisx); // TODO: declar
 extern void CPool__Construct(struct CPool* thisx); // TODO: declare CPool struct
 extern void InitControllers(void);
 extern void PAK_InitSystem(void);
-extern void VM_Initialize(char*, char*);
 extern void ProPack__Decompress(void* notifyId, struct CCacheEntry* cacheEntry);
 extern void func_2523A4(void);
 extern void func_252414(void*);

@@ -3,7 +3,11 @@ CC := gcc
 CFLAGS := -I. -Wall -Wextra -Wno-unused-parameter -pedantic -Ofast -s
 
 # Not sure if n64crc has a repo somewhere that I should pull as a submodule
+ifeq ($(OS),Windows_NT)
+PROGRAMS := n64crc
+else
 PROGRAMS := n64crc lnkconv
+endif
 
 default: all
 

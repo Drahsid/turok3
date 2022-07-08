@@ -22,6 +22,7 @@ CDecompressor__Construct = 0x00244770; // type:func
 CLoader__Construct = 0x00245830; // type:func
 VM_Initialize = 0x00227110; // type:func
 CCache__Construct = 0x00240920; // type:func
+CCache_GetFromLookupTable = 0x00255728; // type:func
 gEngineApp = 0x80147980; // type:data
 gThreadStackIdle = 0x8011E690; // type:data
 gThreadIdle = 0x80147500; // type:data

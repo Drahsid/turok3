@@ -1,25 +1,15 @@
-#ifndef GRAPHU64_H
-#define GRAPHU64_H
+#ifndef T3_GRAPHU64_H
+#define T3_GRAPHU64_H
 
-#include "common_structs.h"
+#include "common.h"
 
-#ifdef NO_DEFINE_FUNCS
-static inline float CVector3__Dot(CVector3* lhs, CVector3* rhs) {
-    return lhs->x * rhs->x + lhs->y * rhs->y + lhs->z * rhs->z;
-}
-
-static inline float CVector3__SquareMagnitude(CVector3* thisx) {
-    return thisx->x * thisx->x + thisx->y * thisx->y + thisx->z * thisx->z;
-}
-
-static inline float CVector3__Magnitude(CVector3* thisx) {
-    return sqrtf(CVector3__SquareMagnitude(thisx));
-}
-#else
 #define CVector3__Dot(LHS, RHS) ((LHS)->x * (RHS)->x + (LHS)->y * (RHS)->y + (LHS)->z * (RHS)->z)
 #define CVector3__SquareMagnitude(THIS) ((THIS)->x * (THIS)->x + (THIS)->y * (THIS)->y + (THIS)->z * (THIS)->z)
 #define CVector3__Magnitude(THIS) (sqrtf(CVector3__SquareMagnitude(THIS)))
-#endif
+
+extern u32 gRandomValue;
+
+extern s32 RandomSwapWord(void);
 
 static inline void CVector3__Add(CVector3* thisx, CVector3* lhs, CVector3* rhs) {
     thisx->x = lhs->x + rhs->x;
@@ -33,7 +23,7 @@ static inline void CVector3__Subtract(CVector3* thisx, CVector3* lhs, CVector3* 
     thisx->z = lhs->z - rhs->z;
 }
 
-static inline void CVector3__MultScaler(CVector3* thisx, CVector3* lhs, float rhs) {
+static inline void CVector3__MultScaler(CVector3* thisx, CVector3* lhs, f32 rhs) {
     thisx->x = lhs->x - rhs;
     thisx->y = lhs->y - rhs;
     thisx->z = lhs->z - rhs;
@@ -46,8 +36,8 @@ static inline void CVector3__Cross(CVector3* thisx, CVector3* lhs, CVector3* rhs
 }
 
 static inline void CVector3__Normalize(CVector3* thisx) {
-    float length;
-    float norm;
+    f32 length;
+    f32 norm;
 
     length = CVector3__Magnitude(thisx);
     if (length != 0) {

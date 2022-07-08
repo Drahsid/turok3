@@ -94,7 +94,7 @@ segments:
       - [0x53A20, asm]
       - [0x53AF0, asm]
       - [0x556A0, asm]
-      - [0x55880, asm]
+      - [0x55880, c, defs]
       - [0x56390, asm]
       - [0x59C00, asm]
       - [0x61BC0, asm]

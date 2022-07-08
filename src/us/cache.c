@@ -2,6 +2,7 @@
 #include "defs.h"
 #include "heap.h"
 #include "hash.h"
+#include "common.h"
 
 INCLUDE_ASM("asm/nonmatchings/cache", func_23D490);
 
@@ -50,7 +51,7 @@ INCLUDE_ASM("asm/nonmatchings/cache", func_23EC68);
 INCLUDE_ASM("asm/nonmatchings/cache", func_23EC9C);
 
 void CCache__Construct(OSId threadId) {
-    int32_t index;
+    s32 index;
     CMemEntry* mem_entry;
     CCacheEntry* cache_entry;
 
@@ -149,11 +150,11 @@ INCLUDE_ASM("asm/nonmatchings/cache", func_2410B0);
 
 INCLUDE_ASM("asm/nonmatchings/cache", func_241198);
 
-INCLUDE_ASM("asm/nonmatchings/cache", func_2411C0);
+INCLUDE_ASM("asm/nonmatchings/cache", CCache__Deallocate);
 
 INCLUDE_ASM("asm/nonmatchings/cache", func_24128C);
 
-INCLUDE_ASM("asm/nonmatchings/cache", func_24136C);
+INCLUDE_ASM("asm/nonmatchings/cache", CCache__DeallocAndReplaceCompressedData);
 
 INCLUDE_ASM("asm/nonmatchings/cache", func_24146C);
 
@@ -163,7 +164,7 @@ INCLUDE_ASM("asm/nonmatchings/cache", CCache__LoadPersistantIndex);
 
 INCLUDE_ASM("asm/nonmatchings/cache", CCache__LoadPersistantSubBlock);
 
-INCLUDE_ASM("asm/nonmatchings/cache", func_2418D4);
+INCLUDE_ASM("asm/nonmatchings/cache", CCache__AllocateMemoryForDecompression);
 
 INCLUDE_ASM("asm/nonmatchings/cache", func_241A28);
 

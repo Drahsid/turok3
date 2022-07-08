@@ -1,12 +1,13 @@
-#ifndef DEFS_H
-#define DEFS_H
+#ifndef T3_DEFS_H
+#define T3_DEFS_H
 
-#include "inttypes.h"
+#include "common.h"
 
-#define OFFSETOF(STRUCT, MEMBER) ((int32_t)&(((STRUCT*)0)->MEMBER))
+#define OFFSETOF(STRUCT, MEMBER) ((s32)&(((STRUCT*)0)->MEMBER))
+#define RANDOM(RANGE) (RandomSwapWord() % (RANGE))
 
 extern SIZE_TYPE GetMemSize(void);
-extern int32_t strcmp(const char* str0, const char* str1);
+extern s32 strcmp(const char* str0, const char* str1);
 extern char* strcpy(char* dest, const char* src);
 
 #endif

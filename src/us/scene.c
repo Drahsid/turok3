@@ -1,4 +1,4 @@
-#include "include_asm.h"
+#include "common.h"
 
 INCLUDE_ASM("asm/nonmatchings/scene", func_277130);
 
@@ -76,7 +76,8 @@ INCLUDE_ASM("asm/nonmatchings/scene", func_27DF7C);
 
 INCLUDE_ASM("asm/nonmatchings/scene", func_27DFCC);
 
-INCLUDE_ASM("asm/nonmatchings/scene", func_27E0B0);
+void func_27E0B0(void) {
+}
 
 INCLUDE_ASM("asm/nonmatchings/scene", func_27E0B8);
 
@@ -234,7 +235,8 @@ INCLUDE_ASM("asm/nonmatchings/scene", func_2813F8);
 
 INCLUDE_ASM("asm/nonmatchings/scene", func_281494);
 
-INCLUDE_ASM("asm/nonmatchings/scene", func_28156C);
+void func_28156C(void) {
+}
 
 INCLUDE_ASM("asm/nonmatchings/scene", func_281574);
 

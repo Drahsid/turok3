@@ -1,6 +1,20 @@
 # Turok 3
 
-A in-progress decompilation of Turok 3 for the N64. This project currently focused on the US release, however supports the other versions.
+A no-longer maintained decompilation of Turok 3. See the section below!
+
+# !!! HOLD UP !!!
+This project was referenced as a foundation for **Turok 3 Remaster**, which I worked on.
+
+With that project being finished, this one is somewhat redundant, serves the purpose of preservation and archival. Thus, I will no longer maintain this project.
+
+Please check out **Turok 3 Remaster**, available on the following platforms:
+|Platform|Link|
+|:-------|:---|
+|Steam|https://store.steampowered.com/app/1996770/Turok_3_Shadow_of_Oblivion_Remastered/|
+|GOG|https://www.gog.com/en/game/turok_3_shadow_of_oblivion_remastered|
+|PS4/PS5|https://store.playstation.com/en-us/concept/10008509|
+|Xbox One / Series X\|S|https://www.xbox.com/en-us/games/store/turok-3-shadow-of-oblivion-remastered/9p0rtpkmcs5s|
+|Switch|https://www.nintendo.com/us/store/products/turok-3-shadow-of-oblivion-remastered-switch/|
 
 ## Building (Linux)
 The build process has the following package requirements:
